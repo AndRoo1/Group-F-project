@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dip3dw5v14jh0"]
+
+[ext_resource type="PackedScene" uid="uid://xf2jcr5arjfo" path="res://Source/Scenes/Entities/playerplane.tscn" id="1_686vo"]
+[ext_resource type="PackedScene" uid="uid://w0tnv0yeyotc" path="res://Source/Scenes/Entities/enemyplane.tscn" id="2_lj2jg"]
+[ext_resource type="PackedScene" uid="uid://bwmdhtwqh1nmo" path="res://Source/Scenes/Entities/player_plane_1.tscn" id="3_wbc35"]
+
+[node name="Game" type="Node2D"]
+
+[node name="PlayerPlane" parent="." instance=ExtResource("1_686vo")]
+position = Vector2(518, 307)
+
+[node name="EnemyPlane" parent="." instance=ExtResource("2_lj2jg")]
+position = Vector2(860, 408)
+
+[node name="EnemyPlane2" parent="." instance=ExtResource("2_lj2jg")]
+position = Vector2(143, 117)
+
+[node name="EnemyPlane3" parent="." instance=ExtResource("2_lj2jg")]
+position = Vector2(681, 127)
+
+[node name="PlayerPlane_1" parent="." instance=ExtResource("3_wbc35")]
+position = Vector2(297, 181)

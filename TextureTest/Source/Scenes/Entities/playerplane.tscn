@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://xf2jcr5arjfo"]
+
+[ext_resource type="Script" uid="uid://dmpi83qw8dx3u" path="res://Source/Scripts/Entities/playerplane.gd" id="1_ddc15"]
+[ext_resource type="Texture2D" uid="uid://bn63yjjfaqv6c" path="res://Assets/Devi.png" id="2_qpq5b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3auyw"]
+radius = 64.0
+
+[node name="PlayerPlane" type="Area2D" groups=["player"]]
+script = ExtResource("1_ddc15")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("2_qpq5b")
+region_rect = Rect2(-19.4874, -6.05128, 865.231, 986.051)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3auyw")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck8il8axbvxt5"]
+
+[ext_resource type="PackedScene" uid="uid://xf2jcr5arjfo" path="res://Source/Scenes/Entities/playerplane.tscn" id="1_8n4kg"]
+[ext_resource type="Texture2D" uid="uid://bjiwms8hox3rs" path="res://Assets/Devu_Judgment.png" id="2_4jcyg"]
+
+[node name="PlayerPlane_2" instance=ExtResource("1_8n4kg")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_4jcyg")

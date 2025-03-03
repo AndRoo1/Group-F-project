@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm3ywkmo5yjxp"]
+
+[ext_resource type="Script" uid="uid://dks6j3p6k4s6m" path="res://Source/Scripts/UI/Battle.gd" id="1_a2f8r"]
+
+[node name="Battle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a2f8r")
+
+[node name="Player" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.088
+anchor_top = 0.296
+anchor_right = 0.247
+anchor_bottom = 0.579
+offset_left = -0.376007
+offset_top = 0.192001
+offset_right = 72.456
+offset_bottom = 72.808
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = -0.1
+anchor_right = 1.1
+anchor_bottom = 1.1
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.117647)
+
+[node name="Enemy" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.672
+anchor_top = 0.30679
+anchor_right = 0.896083
+anchor_bottom = 0.625
+offset_left = -0.144043
+offset_top = 0.199982
+offset_right = -2.28809
+offset_bottom = 50.0
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Enemy"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = -0.1
+anchor_right = 1.1
+anchor_bottom = 1.1
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.117647)
+
+[node name="PlayerVictoryButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.104167
+anchor_top = 0.820988
+anchor_right = 0.277833
+anchor_bottom = 0.905519
+offset_right = -0.0640001
+offset_bottom = 0.224
+text = "Player Victory
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyVictoryButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.694444
+anchor_top = 0.813272
+anchor_right = 0.868111
+anchor_bottom = 0.897802
+offset_right = -0.0640001
+offset_bottom = 0.224
+text = "Enemy Victory
+"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="PlayerVictoryButton" to="." method="_on_player_victory_button_pressed"]
+[connection signal="pressed" from="EnemyVictoryButton" to="." method="_on_enemy_victory_button_pressed"]
