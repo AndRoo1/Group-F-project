@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj2nvhxqpx1j2"]
+
+[ext_resource type="Texture2D" uid="uid://d0v6dqv3o3m5n" path="res://icon.svg" id="1_xtrrq"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xtrrq")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+visible = false
+offset_left = 66.0
+offset_top = -5.0
+offset_right = 240.0
+offset_bottom = 121.0
+text = "Fog Of War made by:
+Quaid Cleland
+Andre Cleary
+Aaron Tracy
+Khalid Sheeta-Bay"
+
+[node name="Camera2D" type="Camera2D" parent="."]
