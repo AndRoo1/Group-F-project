@@ -3,6 +3,7 @@ extends Area2D
 
 const MOVEMENT_SPEED: float = 256
 var alive: bool = true
+@export var health : int = 100
 
 func _physics_process(delta: float) -> void:
 	var movement_direction: Vector2 = Vector2()

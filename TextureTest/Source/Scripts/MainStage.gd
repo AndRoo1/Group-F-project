@@ -35,12 +35,13 @@ func start_battle(player_combatant: Player, enemy_combatant: Enemy) -> void:
 	battle_scene.enemy_combatant = enemy_combatant
 	switch_scene(battle_scene)
 
-func end_battle(player_won: bool) -> void:
-	if player_won:
-		battle_scene.enemy_combatant.get_parent().remove_child(battle_scene.enemy_combatant)
-	else:
-		battle_scene.player_combatant.get_parent().remove_child(battle_scene.player_combatant)
-		battle_scene.player_combatant.alive = false
-		battle_scene.player_combatant.monitoring = false
+func end_battle(player_won: bool, battle_end : bool) -> void:
+	if battle_end:
+		if player_won:
+			battle_scene.enemy_combatant.get_parent().remove_child(battle_scene.enemy_combatant)
+		else:
+			battle_scene.player_combatant.get_parent().remove_child(battle_scene.player_combatant)
+			battle_scene.player_combatant.alive = false
+			battle_scene.player_combatant.monitoring = false
 	switch_scene(game_scene)
 	

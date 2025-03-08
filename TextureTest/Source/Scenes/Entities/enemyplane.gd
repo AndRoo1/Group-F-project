@@ -1,8 +1,8 @@
 class_name Enemy
 extends Area2D
 
-const MOVEMENT_SPEED: float = 200
-
+const MOVEMENT_SPEED: float = 100
+@export var health : int = 80
 var player: Player
 
 func _physics_process(delta: float) -> void:
