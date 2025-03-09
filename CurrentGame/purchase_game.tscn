@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://oevx4jrbvjw5"]
+
+[ext_resource type="Script" uid="uid://cbtvkhut063ya" path="res://purchase_game.gd" id="1_ahjxa"]
+
+[node name="purchase_game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahjxa")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Card num" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Card Num"
+
+[node name="expirey" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Expiry"
+
+[node name="cvv" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter CVV"
+
+[node name="purchase" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Purchase"
+
+[node name="back" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/purchase" to="." method="_on_purchase_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/back" to="." method="_on_back_pressed"]
