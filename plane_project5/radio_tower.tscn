@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://dimncx4tjcjqy"]
+
+[ext_resource type="Script" uid="uid://gd55exf513km" path="res://radio_tower.gd" id="1_d26bh"]
+[ext_resource type="Texture2D" uid="uid://bl38jnf230cu3" path="res://assets/fog/f1.png" id="2_xcy5i"]
+[ext_resource type="Texture2D" uid="uid://drcegctdcxax5" path="res://assets/fog/f2.png" id="3_gsxnb"]
+[ext_resource type="Texture2D" uid="uid://dsi1tltb2tmit" path="res://assets/fog/f3.png" id="4_neo0y"]
+[ext_resource type="Texture2D" uid="uid://3lyg4y4dovl4" path="res://assets/fog/f4.png" id="5_8x2k2"]
+[ext_resource type="Texture2D" uid="uid://cgi1rcvrm8w01" path="res://assets/fog/f5.png" id="6_lf8jw"]
+[ext_resource type="Texture2D" uid="uid://cniice5c0nsyj" path="res://assets/fog/f6.png" id="7_vu222"]
+[ext_resource type="Texture2D" uid="uid://qp1eutcn12k1" path="res://assets/fog/f7.png" id="8_3kmhc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_io2si"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xcy5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gsxnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_neo0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8x2k2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lf8jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vu222")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3kmhc")
+}],
+"loop": true,
+"name": &"fogAnimation",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu6vo"]
+size = Vector2(64, 64)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_s5xn7"]
+
+[node name="radio_tower" type="Area2D"]
+script = ExtResource("1_d26bh")
+
+[node name="fogPos" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos"]
+modulate = Color(1, 1, 1, 0.384314)
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_io2si")
+animation = &"fogAnimation"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_gu6vo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(9.2411e-06, 0.679558, 0.635558, 1)
+position = Vector2(32, 32)
+scale = Vector2(48, 48)
+texture = SubResource("CanvasTexture_s5xn7")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
