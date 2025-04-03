@@ -1,16 +1,85 @@
 class_name Enemy
 extends Area2D
 
-const MOVEMENT_SPEED: float = 100
+@export var speed: float = 200.0  # Movement speed in pixels per second
+@export var grid_size: int = 64  # Size of each grid 
+var alive: bool = true
 @export var health : int = 80
-var player: Player
+@export var moveable: bool = true
+var was_moving: bool = false
+var can_move = false
+@export var attackDiceMin : int = 1
+@export var attackDiceMax : int = 15
+@export var defenseDiceMin : int = 1
+@export var defenseDiceMax : int = 18
+@export var defender : bool = false
+@export var combat_range : float = 1
+
+var target_position: Vector2
+
+func _ready() -> void:
+	BattleSystem.enemy_turn_start.connect(turn_start)
+	# turn_start()
 
 func _physics_process(delta: float) -> void:
-	#player = get_tree().get_first_node_in_group("player")
-	if player != null:
-		var direction_to_player: Vector2 = transform.origin.direction_to(player.position)
-		transform.origin += (direction_to_player * MOVEMENT_SPEED * delta)
+	if !can_move:
+		return
+	
+	if position != target_position:
+		position = position.move_toward(target_position, speed * delta)
+		if !was_moving:
+			BattleSystem.enemy_plane_start_move()
+		was_moving = true
+		return
+	else:
+		if was_moving:
+			stopped()
+			
+	
+	if !can_move:
+		return
 
+func area_entered(area: Area2D) -> void:
+	if area.is_in_group("player") and alive and position.distance_to(area.position) <= max(combat_range, area.combat_range) * grid_size:
+		print("PLAYER DETECTED")
+		BattleSystem.start_battle(area as Player, self)
 
 func _on_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
+
+func stopped() -> void:
+	print("ENEMY STOPPED")
+	can_move = false
+	check_overlaps()
+	was_moving = false
+	BattleSystem.enemy_plane_end_move()
+	BattleSystem.enemy_plane_finished_acting(self)
+
+func check_overlaps():
+	var overlapping_areas: Array[Area2D] = get_overlapping_areas()
+	for area in overlapping_areas:
+		area_entered(area)
+
+func turn_start() -> void:
+	if alive:
+		BattleSystem.register_enemy_plane(self)
+
+func start_acting() -> void:
+	if alive:
+		await get_tree().create_timer(0.2).timeout
+		if moveable:
+			target_position = BattleSystem.get_enemy_target_position(self)
+			if target_position == position:
+				BattleSystem.enemy_plane_start_move()
+				stopped()
+			else:
+				rotation = (target_position - position).angle() + PI / 2
+				can_move = true
+		else:
+			check_overlaps()
+			BattleSystem.enemy_plane_finished_acting(self)
+	else:
+		BattleSystem.enemy_plane_finished_acting(self)
+
+func die():
+	queue_free()

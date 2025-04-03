@@ -4,6 +4,11 @@ var player_combatant: Player
 var enemy_combatant: Enemy
 var playerDice : int
 var enemyDice : int
+var player_defending : bool = false
+var enemy_defending : bool = false
+const ATTACK_COLOR : Color = Color(0.906, 0.314, 0.365)
+const DEFENSE_COLOR : Color = Color(0.329, 0.531, 0.875)
+const DAMAGE_COLOR : Color = Color(1, 0.1, 0.1)
 
 func _ready() -> void:
 	if player_combatant != null:
@@ -21,62 +26,86 @@ func _ready() -> void:
 	
 
 
+	#$DiceLabel.text = str(playerDice)
+func randomise_player_attack() -> void:
+	playerDice = randi_range(player_combatant.attackDiceMin,player_combatant.attackDiceMax)
 
-func _on_player_victory_button_pressed() -> void:
-	BattleSystem.battle_ended.emit(true)
+func randomise_enemy_attack() -> void:
+	enemyDice = randi_range(enemy_combatant.attackDiceMin,enemy_combatant.attackDiceMax)
 
+func randomise_player_defense() -> void:
+	playerDice = randi_range(player_combatant.defenseDiceMin,player_combatant.defenseDiceMax)
+	
+func randomise_enemy_defense() -> void:
+	enemyDice = randi_range(enemy_combatant.defenseDiceMin,enemy_combatant.defenseDiceMax)
 
-func _on_enemy_victory_button_pressed() -> void:
-	BattleSystem.battle_ended.emit(false)
-
-	$AttackButton/DiceLabel.text = str(playerDice)
-func randomise() -> void:
-	playerDice = randi_range(1,20)
-	enemyDice = randi_range(3,19)
 
 func _on_attack_button_pressed() -> void:
-	randomise()
-	$DiceLabel.text = str(playerDice)
-	$DiceLabel2.text = str(enemyDice)
-	if playerDice > enemyDice:
-		enemy_combatant.health -= playerDice
-	elif enemyDice > playerDice:
-		player_combatant.health -= enemyDice
-	else:
-		print("draw!")
-	$AttackButton.disabled = true
-	$DefenseButton.disabled = true
-	$playerHealth.text = str(player_combatant.health)
-	$enemyHealth.text = str(enemy_combatant.health)
-	await get_tree().create_timer(3).timeout
-	if player_combatant.health <= 0:
-		BattleSystem.battle_ended.emit(false, true)
-	elif enemy_combatant.health <= 0:
-		BattleSystem.battle_ended.emit(true, true)
-	else:
-		BattleSystem.battle_ended.emit(false, false)
-	
+	clash(true, !enemy_combatant.defender)
 
 func _on_defense_button_pressed() -> void:
-	randomise()
+	clash(false, !enemy_combatant.defender)
+
+func clash(player_attacking: bool, enemy_attacking: bool) -> void:
+	if player_attacking:
+		player_defending = false
+		$DiceLabel.add_theme_color_override("font_color", ATTACK_COLOR)
+		randomise_player_attack()
+	else:
+		player_defending = true
+		$DiceLabel.add_theme_color_override("font_color", DEFENSE_COLOR)
+		randomise_player_defense()
+	
+	if enemy_attacking:
+		enemy_defending = false
+		$DiceLabel2.add_theme_color_override("font_color", ATTACK_COLOR)
+		randomise_enemy_attack()
+	else:
+		enemy_defending = true
+		$DiceLabel2.add_theme_color_override("font_color", DEFENSE_COLOR)
+		randomise_enemy_defense()
+	
 	$DiceLabel.text = str(playerDice)
 	$DiceLabel2.text = str(enemyDice)
+	
 	if playerDice > enemyDice:
-		pass
+		if player_attacking:
+			player_attack_win()
+		else:
+			player_defense_win()
 	elif enemyDice > playerDice:
-		player_combatant.health -= enemyDice-playerDice
+		if enemy_attacking:
+			enemy_attack_win()
+		else:
+			enemy_defense_win()
 	else:
 		print("draw!")
+	do_battle_stuff()
+
+
+func player_attack_win():
+	enemy_combatant.health -= playerDice - enemyDice * int(enemy_defending)
+	$enemyHealth.add_theme_color_override("font_color", Color(1, 0.1, 0.1))
+
+func player_defense_win():
+	pass
+
+func enemy_attack_win():
+	player_combatant.health -= enemyDice - playerDice * int(player_defending)
+	$playerHealth.add_theme_color_override("font_color", DAMAGE_COLOR)
+
+func enemy_defense_win():
+	pass
+
+func do_battle_stuff():
 	$AttackButton.disabled = true
 	$DefenseButton.disabled = true
 	$playerHealth.text = str(player_combatant.health)
 	$enemyHealth.text = str(enemy_combatant.health)
 	await get_tree().create_timer(3).timeout
 	if player_combatant.health <= 0:
-		BattleSystem.battle_ended.emit(false, true)
+		BattleSystem.end_battle(false, true)
 	elif enemy_combatant.health <= 0:
-		BattleSystem.battle_ended.emit(true, true)
+		BattleSystem.end_battle(true, true)
 	else:
-		BattleSystem.battle_ended.emit(false, false)
-		
-	
+		BattleSystem.end_battle(false, false)
