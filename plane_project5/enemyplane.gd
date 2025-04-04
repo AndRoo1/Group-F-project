@@ -4,7 +4,8 @@ extends Area2D
 @export var speed: float = 200.0  # Movement speed in pixels per second
 @export var grid_size: int = 64  # Size of each grid 
 var alive: bool = true
-@export var health : int = 80
+@export var max_health : int = 80
+var health : int = max_health
 @export var moveable: bool = true
 var was_moving: bool = false
 var can_move = false
@@ -12,13 +13,16 @@ var can_move = false
 @export var attackDiceMax : int = 15
 @export var defenseDiceMin : int = 1
 @export var defenseDiceMax : int = 18
-@export var defender : bool = false
 @export var combat_range : float = 1
+@export_range(0, 1) var attack_chance : float = 1
 
 var target_position: Vector2
 
 func _ready() -> void:
 	BattleSystem.enemy_turn_start.connect(turn_start)
+	$UI/Healthbar.max_value = max_health
+	$UI/Healthbar.value = health
+	set_rotation_angle(rotation)
 	# turn_start()
 
 func _physics_process(delta: float) -> void:
@@ -38,6 +42,17 @@ func _physics_process(delta: float) -> void:
 	
 	if !can_move:
 		return
+
+func set_health(new_health : int) -> void:
+	health = new_health
+	$UI/Healthbar.value = health
+
+func set_rotation_angle(angle : float) -> void:
+	rotation = angle
+	$UI.rotation = -angle
+	#$Rotator.rotation = angle
+	#$Sprite2D.rotation = angle
+	#$CollisionShape2D.rotation = angle
 
 func area_entered(area: Area2D) -> void:
 	if area.is_in_group("player") and alive and position.distance_to(area.position) <= max(combat_range, area.combat_range) * grid_size:
@@ -73,7 +88,7 @@ func start_acting() -> void:
 				BattleSystem.enemy_plane_start_move()
 				stopped()
 			else:
-				rotation = (target_position - position).angle() + PI / 2
+				set_rotation_angle((target_position - position).angle() + PI / 2)
 				can_move = true
 		else:
 			check_overlaps()

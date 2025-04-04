@@ -14,11 +14,13 @@ func _ready() -> void:
 	if player_combatant != null:
 		var player_sprite: Sprite2D = player_combatant.get_node("Sprite2D")
 		$Player.texture = player_sprite.texture
+		$Player.material = player_sprite.material
 	
 	
 	if enemy_combatant != null:
 		var enemy_sprite: Sprite2D = enemy_combatant.get_node("Sprite2D")
 		$Enemy.texture = enemy_sprite.texture
+		$Enemy.material = enemy_sprite.material
 	randomize()
 	
 	$playerHealth.text = str(player_combatant.health)
@@ -41,10 +43,10 @@ func randomise_enemy_defense() -> void:
 
 
 func _on_attack_button_pressed() -> void:
-	clash(true, !enemy_combatant.defender)
+	clash(true, randf() < enemy_combatant.attack_chance)
 
 func _on_defense_button_pressed() -> void:
-	clash(false, !enemy_combatant.defender)
+	clash(false, randf() < enemy_combatant.attack_chance)
 
 func clash(player_attacking: bool, enemy_attacking: bool) -> void:
 	if player_attacking:
@@ -84,14 +86,14 @@ func clash(player_attacking: bool, enemy_attacking: bool) -> void:
 
 
 func player_attack_win():
-	enemy_combatant.health -= playerDice - enemyDice * int(enemy_defending)
+	enemy_combatant.set_health(enemy_combatant.health - (playerDice - enemyDice * int(enemy_defending)))
 	$enemyHealth.add_theme_color_override("font_color", Color(1, 0.1, 0.1))
 
 func player_defense_win():
 	pass
 
 func enemy_attack_win():
-	player_combatant.health -= enemyDice - playerDice * int(player_defending)
+	player_combatant.set_health(player_combatant.health - (enemyDice - playerDice * int(player_defending)))
 	$playerHealth.add_theme_color_override("font_color", DAMAGE_COLOR)
 
 func enemy_defense_win():

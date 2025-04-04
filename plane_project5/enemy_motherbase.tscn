@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bghfw5pkuvanj"]
+
+[ext_resource type="PackedScene" uid="uid://c7tn1was60p4g" path="res://enemy_tower.tscn" id="1_534jt"]
+[ext_resource type="Script" uid="uid://x278cawqxj3x" path="res://enemy_motherbase.gd" id="2_56kqd"]
+[ext_resource type="Texture2D" uid="uid://dds80ajtkwedb" path="res://assets/airbase.png" id="3_yhk8l"]
+
+[node name="EnemyMotherbase" instance=ExtResource("1_534jt")]
+script = ExtResource("2_56kqd")
+max_health = 200
+attackDiceMin = 7
+attackDiceMax = 13
+defenseDiceMin = 8
+defenseDiceMax = 14
+combat_range = 2.0
+attack_chance = 0.5
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("3_yhk8l")
+
+[node name="UI" parent="." index="3"]
+custom_minimum_size = Vector2(192, 192)

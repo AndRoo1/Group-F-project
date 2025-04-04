@@ -1,23 +1,109 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2vf83gypuys3"]
+[gd_scene load_steps=10 format=3 uid="uid://c2vf83gypuys3"]
 
 [ext_resource type="Script" uid="uid://bh556jpcp7skc" path="res://plane.gd" id="1_6ouxh"]
+[ext_resource type="Material" uid="uid://b1qj1kdm3sv06" path="res://AllyShader.tres" id="2_j2bhc"]
 [ext_resource type="Texture2D" uid="uid://dl18gw3my0e2t" path="res://assets/PlaneDefault.png" id="5_5u47j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbmn3"]
+bg_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.39257, 0.970165, 0.546998, 0.6)
+shadow_size = 50
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hbmn3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2bhc"]
+bg_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.431373, 0.929412, 0.909804, 0.329412)
+shadow_size = 50
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hbmn3"]
 radius = 16.0
 height = 100.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dn7q"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ouxh"]
+bg_color = Color(0, 1, 0, 1)
+
 [node name="plane" type="Area2D" groups=["player"]]
+input_pickable = false
 script = ExtResource("1_6ouxh")
+attackDiceMin = 7
+attackDiceMax = 30
 metadata/_edit_group_ = true
 
+[node name="SelectButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_styles/focus = SubResource("StyleBoxFlat_hbmn3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hbmn3")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_hbmn3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hbmn3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j2bhc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_j2bhc")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+material = ExtResource("2_j2bhc")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_5u47j")
+
+[node name="Rotator" type="Node2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_hbmn3")
 
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+
+[node name="Healthbar" type="ProgressBar" parent="UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7dn7q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6ouxh")
+value = 28.51
+show_percentage = false
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="focus_exited" from="SelectButton" to="." method="_on_select_button_focus_exited"]
+[connection signal="pressed" from="SelectButton" to="." method="_on_select_button_pressed"]

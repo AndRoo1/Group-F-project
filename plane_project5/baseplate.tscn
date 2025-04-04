@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://doei0f7rlbum4"]
+[gd_scene load_steps=18 format=3 uid="uid://doei0f7rlbum4"]
 
 [ext_resource type="Script" uid="uid://cl6n1vj8dl7l1" path="res://baseplate.gd" id="1_qx80w"]
 [ext_resource type="Script" uid="uid://sc4bn081wx87" path="res://board.gd" id="2_iljyf"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cqw3ix0xerthu" path="res://enemyplane.tscn" id="5_78jex"]
 [ext_resource type="PackedScene" uid="uid://c2vf83gypuys3" path="res://playerplane.tscn" id="6_3fo1u"]
 [ext_resource type="PackedScene" uid="uid://c55phppan5yr" path="res://enemy_plane2.tscn" id="7_c502s"]
-[ext_resource type="PackedScene" uid="uid://cft6vcn3p1j3o" path="res://motherbase.tscn" id="9_07caf"]
+[ext_resource type="PackedScene" uid="uid://dve8kjmot6y" path="res://player_tower.tscn" id="7_p1amn"]
+[ext_resource type="PackedScene" uid="uid://cft6vcn3p1j3o" path="res://player_motherbase.tscn" id="9_07caf"]
+[ext_resource type="PackedScene" uid="uid://bghfw5pkuvanj" path="res://enemy_motherbase.tscn" id="11_yg84t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lb612"]
 size = Vector2(64, 64)
@@ -1589,28 +1591,49 @@ animation = &"planeHolo"
 frame_progress = 0.512152
 speed_scale = 0.3
 
-[node name="EnemyPlane4" parent="." instance=ExtResource("5_78jex")]
-position = Vector2(480, 416)
-attackDiceMin = 100
-attackDiceMax = 160
-
-[node name="EnemyPlane" parent="." instance=ExtResource("5_78jex")]
-position = Vector2(544, 96)
+[node name="Motherbase" parent="." instance=ExtResource("9_07caf")]
+position = Vector2(96, 96)
 
 [node name="plane" parent="." instance=ExtResource("6_3fo1u")]
-position = Vector2(32, 32)
-attackDiceMin = 1000
-attackDiceMax = 20000
+position = Vector2(224, 160)
+
+[node name="plane2" parent="." instance=ExtResource("6_3fo1u")]
+position = Vector2(224, 224)
+
+[node name="plane3" parent="." instance=ExtResource("6_3fo1u")]
+position = Vector2(224, 288)
+
+[node name="tower" parent="." instance=ExtResource("7_p1amn")]
+position = Vector2(288, 96)
+
+[node name="tower2" parent="." instance=ExtResource("7_p1amn")]
+position = Vector2(96, 288)
+
+[node name="tower3" parent="." instance=ExtResource("7_p1amn")]
+position = Vector2(288, 288)
+
+[node name="EnemyPlane" parent="." instance=ExtResource("5_78jex")]
+position = Vector2(416, 160)
 
 [node name="EnemyPlane2" parent="." instance=ExtResource("7_c502s")]
-position = Vector2(416, 96)
-defender = true
+position = Vector2(672, 288)
+
+[node name="EnemyPlane4" parent="." instance=ExtResource("5_78jex")]
+position = Vector2(608, 416)
+
+[node name="EnemyTower4" parent="." instance=ExtResource("3_v5l56")]
+position = Vector2(672, 224)
+attack_chance = 1.0
+
+[node name="EnemyTower3" parent="." instance=ExtResource("3_v5l56")]
+position = Vector2(864, 224)
+attack_chance = 1.0
 
 [node name="EnemyTower" parent="." instance=ExtResource("3_v5l56")]
-position = Vector2(224, 416)
+position = Vector2(672, 416)
 
-[node name="Motherbase" parent="." instance=ExtResource("9_07caf")]
-position = Vector2(96, 224)
+[node name="EnemyMotherbase" parent="." instance=ExtResource("11_yg84t")]
+position = Vector2(864, 416)
 
 [connection signal="mouse_entered" from="board/columnA/1,a" to="board" method="_on_a_mouse_entered_1_a"]
 [connection signal="mouse_entered" from="board/columnA/2,a" to="board" method="_on_a_mouse_entered_2_a"]

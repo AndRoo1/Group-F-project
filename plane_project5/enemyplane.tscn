@@ -1,22 +1,71 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqw3ix0xerthu"]
+[gd_scene load_steps=8 format=3 uid="uid://cqw3ix0xerthu"]
 
 [ext_resource type="Script" uid="uid://bfk2dmkihyrd7" path="res://enemyplane.gd" id="1_mikk6"]
+[ext_resource type="Shader" uid="uid://cd6jw58aaln7w" path="res://AssetLibrary/OutlineShader/outline.gdshader" id="2_mtnx4"]
 [ext_resource type="Texture2D" uid="uid://cwjkn3bmdvatw" path="res://assets/PlaneDeath.png" id="2_vx0g3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vx0g3"]
 radius = 16.0
 height = 100.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x51v5"]
+shader = ExtResource("2_mtnx4")
+shader_parameter/color = Color(1, 0, 0, 0.517647)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtnx4"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x51v5"]
+bg_color = Color(0, 1, 0, 1)
+
 [node name="EnemyPlane" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_mikk6")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("2_vx0g3")
-region_rect = Rect2(-19.4874, -6.05128, 865.231, 986.051)
+attack_chance = 0.75
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_vx0g3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_x51v5")
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_vx0g3")
+region_rect = Rect2(-19.4874, -6.05128, 865.231, 986.051)
+
+[node name="Rotator" type="Node2D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+
+[node name="Healthbar" type="ProgressBar" parent="UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_mtnx4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x51v5")
+value = 28.51
+show_percentage = false
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

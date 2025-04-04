@@ -4,7 +4,8 @@ extends Area2D
 @export var speed: float = 200.0  # Movement speed in pixels per second
 @export var grid_size: int = 64  # Size of each grid 
 var alive: bool = true
-@export var health : int = 100
+@export var max_health : int = 100
+var health : int = max_health
 @export var moveable: bool = true
 var was_moving: bool = false
 var can_move = true
@@ -13,13 +14,19 @@ var can_move = true
 @export var defenseDiceMin : int = 6
 @export var defenseDiceMax : int = 24
 @export var combat_range : float = 1
+var selected : bool = false
 
 var target_position: Vector2
 
 func _ready():
+	$UI/Healthbar.max_value = max_health
+	$UI/Healthbar.value = health
 	target_position = position
 	BattleSystem.player_turn_start.connect(turn_start)
 	turn_start()
+	if !moveable:
+		disable_select_button()
+	set_rotation_angle(rotation)
 
 func _process(delta):
 	if !moveable:
@@ -29,18 +36,16 @@ func _process(delta):
 		position = position.move_toward(target_position, speed * delta)
 		if !was_moving:
 			BattleSystem.player_plane_start_move()
+			selected = false
+			disable_select_button()
 		was_moving = true
 		return
 	else:
 		if was_moving:
-			print("STOPPED")
-			can_move = false
-			check_overlaps()
-			was_moving = false
-			BattleSystem.player_plane_end_move()
+			stopped()
 			
 	
-	if !can_move:
+	if !can_move or !selected:
 		return
 	
 	var direction = Vector2.ZERO
@@ -56,13 +61,31 @@ func _process(delta):
 	
 	
 	if direction != Vector2.ZERO:
-		rotation = direction.angle() + PI/2
+		set_rotation_angle(direction.angle() + PI / 2)
 		target_position += direction * grid_size
+
+func set_health(new_health : int) -> void:
+	health = new_health
+	$UI/Healthbar.value = health
+
+func set_rotation_angle(angle : float) -> void:
+	rotation = angle
+	$UI.rotation = -angle
+	#$Rotator.rotation = angle
+	#$Sprite2D.rotation = angle
+	#$CollisionShape2D.rotation = angle
 
 func area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") and alive and position.distance_to(area.position) <= grid_size * max(combat_range, area.combat_range):
 		print("ENEMY")
 		BattleSystem.start_battle(self, area as Enemy)
+
+func stopped() -> void:
+	print("STOPPED")
+	can_move = false
+	check_overlaps()
+	was_moving = false
+	BattleSystem.player_plane_end_move()
 
 func check_overlaps():
 	var overlapping_areas: Array[Area2D] = get_overlapping_areas()
@@ -71,8 +94,11 @@ func check_overlaps():
 
 func turn_start() -> void:
 	can_move = true
+	selected = false
 	if alive:
 		BattleSystem.register_player_plane(self)
+	if moveable:
+		enable_select_button()
 
 func _on_area_entered(area: Area2D) -> void:
 	#print("aaa")
@@ -81,3 +107,22 @@ func _on_area_entered(area: Area2D) -> void:
 
 func die():
 	queue_free()
+
+func enable_select_button() -> void:
+	$SelectButton.disabled = false
+	$SelectButton.focus_mode = 1
+	$SelectButton.show()
+
+func disable_select_button() -> void:
+	$SelectButton.disabled = true
+	$SelectButton.release_focus()
+	$SelectButton.focus_mode = 0
+	$SelectButton.hide()
+
+func _on_select_button_pressed() -> void:
+	selected = true
+	print("selected", self)
+
+
+func _on_select_button_focus_exited() -> void:
+	selected = false
