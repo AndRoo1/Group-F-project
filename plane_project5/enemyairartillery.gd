@@ -29,7 +29,8 @@ func _on_area_entered(area: Area2D) -> void:
 		var plane: Player = area.get_parent()
 		if plane:
 			plane.queue_free()
-			BattleSystem.player_plane_end_move()
+			if BattleSystem.plane_moving:
+				BattleSystem.player_plane_end_move()
 
 		# fade out artillery sprite
 		var tween = create_tween()

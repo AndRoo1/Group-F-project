@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 		print(fogLeft)
 		if fogLeft == 0:
 			fog_mode = false
+			fogNum.hide()
 		fogNum.text = str(fogLeft)
 
 func make_fog():

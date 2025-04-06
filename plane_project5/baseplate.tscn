@@ -2146,6 +2146,18 @@ position = Vector2(480, 96)
 [node name="EnemyArtillery" parent="." instance=ExtResource("20_ev7tn")]
 position = Vector2(160, 352)
 
+[node name="EnemyArtillery3" parent="." instance=ExtResource("20_ev7tn")]
+position = Vector2(160, 416)
+
+[node name="EnemyArtillery5" parent="." instance=ExtResource("20_ev7tn")]
+position = Vector2(96, 416)
+
+[node name="EnemyArtillery6" parent="." instance=ExtResource("20_ev7tn")]
+position = Vector2(224, 416)
+
+[node name="EnemyArtillery4" parent="." instance=ExtResource("20_ev7tn")]
+position = Vector2(96, 352)
+
 [node name="EnemyArtillery2" parent="." instance=ExtResource("20_ev7tn")]
 position = Vector2(224, 352)
 

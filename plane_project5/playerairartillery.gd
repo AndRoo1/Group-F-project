@@ -29,6 +29,7 @@ func _on_area_entered(area: Area2D) -> void:
 		var plane = area.get_parent()
 		if plane:
 			plane.queue_free()
+			BattleSystem.kill_enemy_plane(plane)
 			BattleSystem.enemy_plane_end_move()
 			BattleSystem.enemy_plane_finished_acting(plane)
 

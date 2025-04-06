@@ -24,6 +24,7 @@ extends Node2D
 @onready var points = 1000 #
 @onready var motherbasePlace = false
 @onready var motherbaseinUse = false
+var buying_hidden = false
 
 var deduct_timer_queued = false
 
@@ -39,6 +40,7 @@ func _ready():
 	BattleSystem.player_turn_end.connect(player_turn_end)
 
 func player_turn_start():
+	print("PLAYER TURN START TRIGGERED ON BOARD")
 	var player_planes = get_tree().get_nodes_in_group("player")
 	var moveable_planes_left = false
 	for plane: Player in player_planes:
@@ -46,12 +48,17 @@ func player_turn_start():
 			moveable_planes_left = true
 			break
 	if moveable_planes_left or points >= 100:
-		$"../AnimationPlayer".play_backwards("HideButtons")
+		if buying_hidden:
+			$"../AnimationPlayer".play_backwards("HideButtons")
+			buying_hidden = false
 	else:
+		await get_tree().create_timer(0.5).timeout
 		BattleSystem.start_enemy_turn()
 
 func player_turn_end():
-	$"../AnimationPlayer".play("HideButtons")
+	if !buying_hidden:
+		$"../AnimationPlayer".play("HideButtons")
+		buying_hidden = true
 
 func enemy_plane_killed(enemy: Enemy):
 	add_points(enemy.point_reward)
@@ -89,17 +96,7 @@ func _process(delta):
 		#get_tree().current_scene.add_child(new_tower) # 
 		add_child(new_tower)
 		build_mode = false
-		
-	if build_mode == true && motherbaseinUse == false &&building_type == 3 && can_place == true && Input.is_action_just_pressed("build"): #build is just another way of saying left clickkkk blehh
-		var radio_tower_scene = preload("res://player_motherbase.tscn")  #path to scene
-		var new_tower = radio_tower_scene.instantiate()  # makes mother
-		new_tower.position = Vector2(squareX*64+32,squareY*64+32)  # Place it at the mouse position
-		#get_tree().current_scene.add_child(new_tower) # 
-		add_child(new_tower)
-		build_mode = false
-		make_motherbase()
-		motherbaseinUse = true
-		print("mother is here")
+		make_radar()
 
 	if build_mode == true && building_type == 2 && can_place == true && Input.is_action_just_pressed("build"): #build is just another way of saying left clickkkk blehh
 		var air_artillery_scene = preload("res://player_air_artillery.tscn")  #path to scene
@@ -109,15 +106,17 @@ func _process(delta):
 		add_child(new_tower)
 		build_mode = false
 		make_artillery()
-
-	if build_mode == true && building_type == 1 && can_place == true && Input.is_action_just_pressed("build"): #build is just another way of saying left clickkkk blehh
-		var radio_tower_scene = preload("res://radio_tower.tscn")  #path to scene
-		var new_tower = radio_tower_scene.instantiate()  # makes radio tower
+	
+	if build_mode == true && motherbaseinUse == false &&building_type == 3 && can_place == true && Input.is_action_just_pressed("build"): #build is just another way of saying left clickkkk blehh
+		var motherbase_scene = preload("res://player_motherbase.tscn")  #path to scene
+		var new_tower = motherbase_scene.instantiate()  # makes mother
 		new_tower.position = Vector2(squareX*64+32,squareY*64+32)  # Place it at the mouse position
 		#get_tree().current_scene.add_child(new_tower) # 
 		add_child(new_tower)
 		build_mode = false
-		make_radar()
+		make_motherbase()
+		motherbaseinUse = true
+		print("mother is here")
 	
 	var plane_scenes = ["res://playerplane.tscn","res://playerplane2.tscn","res://playerplane3.tscn","res://playerplane4.tscn","res://playerplane5.tscn"]
 	if plane_mode && Input.is_action_just_pressed("build"):
