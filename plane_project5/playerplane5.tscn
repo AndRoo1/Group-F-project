@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1qvj"]
 size = Vector2(35, 23)
 
-[node name="plane" instance=ExtResource("1_26ava")]
+[node name="plane2" instance=ExtResource("1_26ava")]
 max_health = 150
 attackDiceMin = 8
 defenseDiceMin = 12
