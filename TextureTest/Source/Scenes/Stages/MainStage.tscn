@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlo8kjqploi7b"]
-
-[ext_resource type="Script" uid="uid://5crmrv5383s" path="res://Source/Scripts/MainStage.gd" id="1_wpvpg"]
-
-[node name="MainStage" type="Node"]
-script = ExtResource("1_wpvpg")
