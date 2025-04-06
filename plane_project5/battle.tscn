@@ -126,9 +126,9 @@ anchor_left = 1.739
 anchor_top = -3.973
 anchor_right = 1.739
 anchor_bottom = -3.973
-offset_left = -1620.33
+offset_left = -1318.44
 offset_top = 2825.5
-offset_right = -1492.33
+offset_right = -1190.44
 offset_bottom = 2950.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -137,43 +137,46 @@ theme_override_font_sizes/font_size = 50
 [node name="DiceLabel2" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 3.518
-anchor_top = -3.945
-anchor_right = 3.518
-anchor_bottom = -3.945
-offset_left = -3397.74
-offset_top = 2807.36
-offset_right = -3308.74
-offset_bottom = 2938.36
+anchor_left = 1.76087
+anchor_top = -3.973
+anchor_right = 1.76087
+anchor_bottom = -3.973
+offset_left = -1127.44
+offset_top = 2825.5
+offset_right = -999.44
+offset_bottom = 2950.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
+metadata/_edit_use_anchors_ = true
 
 [node name="playerHealth" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.376
-anchor_top = 0.678
-anchor_right = 0.376
-anchor_bottom = 0.678
-offset_left = -50.152
-offset_top = -44.344
-offset_right = 62.848
-offset_bottom = 33.656
+anchor_left = 0.365867
+anchor_top = 0.625432
+anchor_right = 0.440158
+anchor_bottom = 0.731543
+offset_left = -0.232025
+offset_top = -0.279999
+offset_right = 0.447968
+offset_bottom = -0.0400085
 theme_override_font_sizes/font_size = 50
+metadata/_edit_use_anchors_ = true
 
 [node name="enemyHealth" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.597
-anchor_top = 0.664
-anchor_right = 0.597
-anchor_bottom = 0.664
-offset_left = -53.744
-offset_top = -30.272
-offset_right = 60.256
-offset_bottom = 48.728
+anchor_left = 0.541908
+anchor_top = 0.625432
+anchor_right = 0.6162
+anchor_bottom = 0.731543
+offset_left = -0.232025
+offset_top = -0.279999
+offset_right = 0.447968
+offset_bottom = -0.0400085
 theme_override_font_sizes/font_size = 50
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="PlayerVictoryButton" to="." method="_on_player_victory_button_pressed"]
 [connection signal="pressed" from="AttackButton" to="." method="_on_attack_button_pressed"]
