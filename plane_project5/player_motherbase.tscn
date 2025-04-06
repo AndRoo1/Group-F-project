@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dve8kjmot6y" path="res://player_tower.tscn" id="1_1o5cb"]
 [ext_resource type="Script" uid="uid://56y27jnb5nmm" path="res://player_motherbase.gd" id="2_40xoc"]
-[ext_resource type="Texture2D" uid="uid://dds80ajtkwedb" path="res://assets/airbase.png" id="2_p7gmb"]
+[ext_resource type="Texture2D" uid="uid://uq2dbchon6b1" path="res://assets/airbase.png" id="2_p7gmb"]
 
 [node name="Motherbase" instance=ExtResource("1_1o5cb")]
 input_pickable = true

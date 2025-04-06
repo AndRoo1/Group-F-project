@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://1xuvocg8vsxv"]
+
+[ext_resource type="PackedScene" uid="uid://dve8kjmot6y" path="res://player_tower.tscn" id="1_7yj54"]
+[ext_resource type="Script" uid="uid://cdhcugmmjllx6" path="res://player_radio_tower.gd" id="2_s47rd"]
+[ext_resource type="Texture2D" uid="uid://bl38jnf230cu3" path="res://assets/fog/f1.png" id="3_yafuv"]
+[ext_resource type="Texture2D" uid="uid://drcegctdcxax5" path="res://assets/fog/f2.png" id="4_0pxot"]
+[ext_resource type="Texture2D" uid="uid://dsi1tltb2tmit" path="res://assets/fog/f3.png" id="5_nstth"]
+[ext_resource type="Texture2D" uid="uid://3lyg4y4dovl4" path="res://assets/fog/f4.png" id="6_bj4uv"]
+[ext_resource type="Texture2D" uid="uid://cgi1rcvrm8w01" path="res://assets/fog/f5.png" id="7_vxe3i"]
+[ext_resource type="Texture2D" uid="uid://cniice5c0nsyj" path="res://assets/fog/f6.png" id="8_vy4rc"]
+[ext_resource type="Texture2D" uid="uid://qp1eutcn12k1" path="res://assets/fog/f7.png" id="9_i2bpg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uxttv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_yafuv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0pxot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nstth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bj4uv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vxe3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vy4rc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_i2bpg")
+}],
+"loop": true,
+"name": &"fogAnimation",
+"speed": 5.0
+}]
+
+[node name="PlayerTower" instance=ExtResource("1_7yj54")]
+script = ExtResource("2_s47rd")
+attackDiceMax = 30
+
+[node name="fogNum" type="Label" parent="UI" index="0"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.596078, 0, 1)
+theme_override_font_sizes/font_size = 31
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="fogPos" type="Node2D" parent="." index="5"]
+modulate = Color(1, 1, 1, 0.466667)
+top_level = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos" index="0"]
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_uxttv")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"

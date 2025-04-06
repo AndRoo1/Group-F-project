@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cbtvkhut063ya" path="res://purchase_game.gd" id="1_ahjxa"]
 
 [node name="purchase_game" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

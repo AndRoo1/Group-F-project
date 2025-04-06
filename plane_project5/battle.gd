@@ -108,6 +108,7 @@ func do_battle_stuff():
 	if player_combatant.health <= 0:
 		BattleSystem.end_battle(false, true)
 	elif enemy_combatant.health <= 0:
+		BattleSystem.kill_enemy_plane(enemy_combatant)
 		BattleSystem.end_battle(true, true)
 	else:
 		BattleSystem.end_battle(false, false)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwhy5aossaxw4"]
+
+[ext_resource type="PackedScene" uid="uid://c55phppan5yr" path="res://enemy_plane2.tscn" id="1_bji6t"]
+[ext_resource type="Texture2D" uid="uid://bwf3lknfhn3dy" path="res://assets/planes/plane3/jetlvl3up.png" id="2_86k7a"]
+
+[node name="EnemyPlane" instance=ExtResource("1_bji6t")]
+attackDiceMin = 7
+attackDiceMax = 20
+defenseDiceMin = 10
+defenseDiceMax = 20
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(-0.5, 0)
+texture = ExtResource("2_86k7a")

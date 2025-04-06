@@ -1,16 +1,23 @@
-[gd_scene load_steps=18 format=3 uid="uid://doei0f7rlbum4"]
+[gd_scene load_steps=33 format=3 uid="uid://doei0f7rlbum4"]
 
 [ext_resource type="Script" uid="uid://cl6n1vj8dl7l1" path="res://baseplate.gd" id="1_qx80w"]
 [ext_resource type="Script" uid="uid://sc4bn081wx87" path="res://board.gd" id="2_iljyf"]
 [ext_resource type="Texture2D" uid="uid://dl18gw3my0e2t" path="res://assets/PlaneDefault.png" id="3_3fo1u"]
-[ext_resource type="PackedScene" uid="uid://c7tn1was60p4g" path="res://enemy_tower.tscn" id="3_v5l56"]
 [ext_resource type="Texture2D" uid="uid://cvbdp5oqvtoex" path="res://assets/planeholo.png" id="4_c502s"]
 [ext_resource type="PackedScene" uid="uid://cqw3ix0xerthu" path="res://enemyplane.tscn" id="5_78jex"]
-[ext_resource type="PackedScene" uid="uid://c2vf83gypuys3" path="res://playerplane.tscn" id="6_3fo1u"]
+[ext_resource type="Texture2D" uid="uid://w7g4gknpcrhg" path="res://assets/radiotower.png" id="6_3fo1u"]
+[ext_resource type="Texture2D" uid="uid://ble8h0v7qcsie" path="res://assets/planes/plane 1/jetlvl1up.png" id="6_c502s"]
 [ext_resource type="PackedScene" uid="uid://c55phppan5yr" path="res://enemy_plane2.tscn" id="7_c502s"]
-[ext_resource type="PackedScene" uid="uid://dve8kjmot6y" path="res://player_tower.tscn" id="7_p1amn"]
-[ext_resource type="PackedScene" uid="uid://cft6vcn3p1j3o" path="res://player_motherbase.tscn" id="9_07caf"]
-[ext_resource type="PackedScene" uid="uid://bghfw5pkuvanj" path="res://enemy_motherbase.tscn" id="11_yg84t"]
+[ext_resource type="Texture2D" uid="uid://bmjlfnbuo4ber" path="res://assets/planes/plane2/jetlvl2up.png" id="7_v5l56"]
+[ext_resource type="Texture2D" uid="uid://bwf3lknfhn3dy" path="res://assets/planes/plane3/jetlvl3up.png" id="8_p1amn"]
+[ext_resource type="Texture2D" uid="uid://cdd6xu802opkf" path="res://assets/planes/plane4/jetlvl4up.png" id="9_yg84t"]
+[ext_resource type="Texture2D" uid="uid://coqftm0gj8em1" path="res://assets/planes/plane5/jetlvl5up.png" id="10_7v7ku"]
+[ext_resource type="Texture2D" uid="uid://cd7pr5538r821" path="res://assets/building.png" id="12_yg84t"]
+[ext_resource type="Texture2D" uid="uid://uq2dbchon6b1" path="res://assets/airbase.png" id="13_h1wcw"]
+[ext_resource type="Texture2D" uid="uid://c3tmcw4oeq6d6" path="res://antiartillery.png" id="14_8n4fi"]
+[ext_resource type="Texture2D" uid="uid://bkfwrwsunixyo" path="res://assets/points.png" id="16_h1wcw"]
+[ext_resource type="PackedScene" uid="uid://bghfw5pkuvanj" path="res://enemy_motherbase.tscn" id="17_x7dun"]
+[ext_resource type="PackedScene" uid="uid://c7tn1was60p4g" path="res://enemy_tower.tscn" id="18_1fdfd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lb612"]
 size = Vector2(64, 64)
@@ -36,6 +43,153 @@ animations = [{
 "name": &"planeHolo",
 "speed": 5.0
 }]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8n4fi"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3fo1u"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_78jex"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_07caf"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_p1amn"]
+
+[sub_resource type="Animation" id="Animation_8n4fi"]
+resource_name = "HideButtons"
+markers = [{
+"color": Color(1, 1, 1, 1),
+"name": &"new_marker",
+"time": 1.0
+}]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hud/PlanesHud:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 552), Vector2(8, 652)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hud/BuildingsHud:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 592), Vector2(8, 692)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hud/building_backboard_node:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 10), Vector2(-1, 110)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hud/plane_backboard_node:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 10), Vector2(-1, 110)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hud/hud_background/sub_backboard:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(352, 589), Vector2(352, 689)]
+}
+
+[sub_resource type="Animation" id="Animation_h1wcw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hud/PlanesHud:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 552)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hud/BuildingsHud:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 592)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hud/building_backboard_node:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 10)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hud/plane_backboard_node:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hud/hud_background/sub_backboard:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(352, 589)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aapj2"]
+_data = {
+&"HideButtons": SubResource("Animation_8n4fi"),
+&"RESET": SubResource("Animation_h1wcw")
+}
 
 [node name="baseplate" type="Node2D"]
 script = ExtResource("1_qx80w")
@@ -1591,49 +1745,373 @@ animation = &"planeHolo"
 frame_progress = 0.512152
 speed_scale = 0.3
 
-[node name="Motherbase" parent="." instance=ExtResource("9_07caf")]
-position = Vector2(96, 96)
-
-[node name="plane" parent="." instance=ExtResource("6_3fo1u")]
-position = Vector2(224, 160)
-
-[node name="plane2" parent="." instance=ExtResource("6_3fo1u")]
-position = Vector2(224, 224)
-
-[node name="plane3" parent="." instance=ExtResource("6_3fo1u")]
-position = Vector2(224, 288)
-
-[node name="tower" parent="." instance=ExtResource("7_p1amn")]
-position = Vector2(288, 96)
-
-[node name="tower2" parent="." instance=ExtResource("7_p1amn")]
-position = Vector2(96, 288)
-
-[node name="tower3" parent="." instance=ExtResource("7_p1amn")]
-position = Vector2(288, 288)
+[node name="motherbase_holo" type="Sprite2D" parent="board"]
+modulate = Color(0, 0, 0.819608, 1)
+scale = Vector2(192, 192)
+texture = SubResource("CanvasTexture_8n4fi")
 
 [node name="EnemyPlane" parent="." instance=ExtResource("5_78jex")]
-position = Vector2(416, 160)
+position = Vector2(738, 97)
 
-[node name="EnemyPlane2" parent="." instance=ExtResource("7_c502s")]
-position = Vector2(672, 288)
+[node name="hud" type="Node2D" parent="."]
 
-[node name="EnemyPlane4" parent="." instance=ExtResource("5_78jex")]
-position = Vector2(608, 416)
+[node name="hud_background" type="Node2D" parent="hud"]
 
-[node name="EnemyTower4" parent="." instance=ExtResource("3_v5l56")]
-position = Vector2(672, 224)
-attack_chance = 1.0
+[node name="next turn + timer" type="Sprite2D" parent="hud/hud_background"]
+position = Vector2(891, 574)
+scale = Vector2(71.6332, -62.694)
+texture = SubResource("CanvasTexture_3fo1u")
 
-[node name="EnemyTower3" parent="." instance=ExtResource("3_v5l56")]
-position = Vector2(864, 224)
-attack_chance = 1.0
+[node name="backboard" type="Sprite2D" parent="hud/hud_background"]
+modulate = Color(0.274557, 0.14092, 0.04177, 1)
+position = Vector2(480, 580)
+scale = Vector2(960, -136)
+texture = SubResource("CanvasTexture_78jex")
 
-[node name="EnemyTower" parent="." instance=ExtResource("3_v5l56")]
-position = Vector2(672, 416)
+[node name="trim" type="Sprite2D" parent="hud/hud_background"]
+modulate = Color(0.717376, 0.456381, 0.128701, 1)
+position = Vector2(480, 515)
+scale = Vector2(960, 6)
+texture = SubResource("CanvasTexture_78jex")
 
-[node name="EnemyMotherbase" parent="." instance=ExtResource("11_yg84t")]
-position = Vector2(864, 416)
+[node name="sub_backboard" type="Sprite2D" parent="hud/hud_background"]
+modulate = Color(0.207843, 0.0901961, 0, 1)
+position = Vector2(352, 589)
+scale = Vector2(610.659, 88.9714)
+texture = SubResource("CanvasTexture_07caf")
+
+[node name="sub_backboard2" type="Sprite2D" parent="hud/hud_background"]
+modulate = Color(0.207843, 0.0901961, 0, 1)
+position = Vector2(720, 560)
+scale = Vector2(111.855, 32.0904)
+texture = SubResource("CanvasTexture_07caf")
+
+[node name="plane_backboard_node" type="Node2D" parent="hud"]
+position = Vector2(-1, 10)
+
+[node name="plane1_summon" type="Button" parent="hud/plane_backboard_node"]
+offset_left = 57.0
+offset_top = 545.0
+offset_right = 351.0
+offset_bottom = 805.0
+scale = Vector2(0.266172, 0.264654)
+tooltip_text = "V1 Plane
+HP: 100
+ATK: 1-14
+DEF: 1-20"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud/plane_backboard_node/plane1_summon"]
+texture_filter = 1
+position = Vector2(150.279, 102.02)
+scale = Vector2(5.3656, 5.12576)
+texture = ExtResource("6_c502s")
+
+[node name="plane2_summon" type="Button" parent="hud/plane_backboard_node"]
+offset_left = 190.0
+offset_top = 545.0
+offset_right = 484.0
+offset_bottom = 805.0
+scale = Vector2(0.266172, 0.264654)
+tooltip_text = "V2 Plane
+HP: 120
+ATK: 4-24
+DEF: 1-28"
+text = "100"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud/plane_backboard_node/plane2_summon"]
+texture_filter = 1
+position = Vector2(139.008, 124.691)
+scale = Vector2(5.3656, 5.12576)
+texture = ExtResource("7_v5l56")
+
+[node name="plane3_summon" type="Button" parent="hud/plane_backboard_node"]
+offset_left = 313.0
+offset_top = 545.0
+offset_right = 607.0
+offset_bottom = 805.0
+scale = Vector2(0.266172, 0.264654)
+tooltip_text = "V3 Plane
+HP: 120
+ATK: 7-20
+DEF: 10-20"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud/plane_backboard_node/plane3_summon"]
+texture_filter = 1
+position = Vector2(146.522, 124.691)
+scale = Vector2(4.5, 4.298)
+texture = ExtResource("8_p1amn")
+
+[node name="plane4_summon" type="Button" parent="hud/plane_backboard_node"]
+offset_left = 441.0
+offset_top = 545.0
+offset_right = 735.0
+offset_bottom = 805.0
+scale = Vector2(0.266172, 0.264654)
+tooltip_text = "V4 Plane
+HP: 130
+ATK: 4-30
+DEF: 6-30"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud/plane_backboard_node/plane4_summon"]
+texture_filter = 1
+position = Vector2(139.008, 124.691)
+scale = Vector2(5.23438, 4.95693)
+texture = ExtResource("9_yg84t")
+
+[node name="plane5_summon" type="Button" parent="hud/plane_backboard_node"]
+offset_left = 569.0
+offset_top = 545.0
+offset_right = 863.0
+offset_bottom = 805.0
+scale = Vector2(0.266172, 0.264654)
+tooltip_text = "V5 Plane
+HP: 150
+ATK: 8-30
+DEF: 12-25"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud/plane_backboard_node/plane5_summon"]
+texture_filter = 1
+position = Vector2(146.522, 124.691)
+scale = Vector2(3.99617, 4.01801)
+texture = ExtResource("10_7v7ku")
+
+[node name="planepoints1" type="Label" parent="hud/plane_backboard_node"]
+offset_left = 97.0
+offset_top = 599.0
+offset_right = 137.0
+offset_bottom = 622.0
+text = "$100"
+
+[node name="planepoints2" type="Label" parent="hud/plane_backboard_node"]
+offset_left = 228.0
+offset_top = 599.0
+offset_right = 268.0
+offset_bottom = 622.0
+text = "$120"
+
+[node name="planepoints3" type="Label" parent="hud/plane_backboard_node"]
+offset_left = 353.0
+offset_top = 598.0
+offset_right = 393.0
+offset_bottom = 621.0
+text = "$140"
+
+[node name="planepoints4" type="Label" parent="hud/plane_backboard_node"]
+offset_left = 481.0
+offset_top = 598.0
+offset_right = 521.0
+offset_bottom = 621.0
+text = "$160"
+
+[node name="planepoints5" type="Label" parent="hud/plane_backboard_node"]
+offset_left = 609.0
+offset_top = 598.0
+offset_right = 649.0
+offset_bottom = 621.0
+text = "$180"
+
+[node name="building_backboard_node" type="Node2D" parent="hud"]
+position = Vector2(-1, 10)
+
+[node name="radar_summon" type="Button" parent="hud/building_backboard_node"]
+offset_left = 57.0
+offset_top = 545.0
+offset_right = 351.0
+offset_bottom = 805.0
+scale = Vector2(0.266172, 0.264654)
+tooltip_text = "Radar Tower
+grants 8 Fog tiles to place
+To obscure enemy vision"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud/building_backboard_node/radar_summon"]
+texture_filter = 1
+position = Vector2(131.494, 128.47)
+scale = Vector2(1.61574, 1.40858)
+texture = ExtResource("6_3fo1u")
+
+[node name="artillary_summon" type="Button" parent="hud/building_backboard_node"]
+offset_left = 190.0
+offset_top = 545.0
+offset_right = 484.0
+offset_bottom = 805.0
+scale = Vector2(0.266172, 0.264654)
+tooltip_text = "Artillery
+Lays a trap to destroy incoming planes"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud/building_backboard_node/artillary_summon"]
+texture_filter = 1
+position = Vector2(139.008, 124.691)
+scale = Vector2(1.5, 1.434)
+texture = ExtResource("14_8n4fi")
+
+[node name="motherbase_summon" type="Button" parent="hud/building_backboard_node"]
+offset_left = 313.0
+offset_top = 545.0
+offset_right = 607.0
+offset_bottom = 805.0
+scale = Vector2(0.266172, 0.264654)
+tooltip_text = "Motherbase
+Keep safe!"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud/building_backboard_node/motherbase_summon"]
+texture_filter = 1
+position = Vector2(146.522, 124.691)
+scale = Vector2(1.09, 1.09)
+texture = ExtResource("13_h1wcw")
+
+[node name="buildingLabel1" type="Label" parent="hud/building_backboard_node"]
+offset_left = 97.0
+offset_top = 598.0
+offset_right = 137.0
+offset_bottom = 621.0
+text = "$200"
+
+[node name="buildingLabel2" type="Label" parent="hud/building_backboard_node"]
+offset_left = 233.0
+offset_top = 598.0
+offset_right = 273.0
+offset_bottom = 621.0
+text = "$200"
+
+[node name="BuildingsHud" type="Button" parent="hud"]
+offset_left = 8.0
+offset_top = 592.0
+offset_right = 67.0
+offset_bottom = 656.0
+scale = Vector2(0.546756, 0.487291)
+toggle_mode = true
+flat = true
+
+[node name="buildingback" type="Sprite2D" parent="hud/BuildingsHud"]
+modulate = Color(0.207843, 0.0901961, 0, 1)
+position = Vector2(29.2635, 32.8346)
+scale = Vector2(59.0327, -64.3228)
+texture = SubResource("CanvasTexture_p1amn")
+
+[node name="buildingback2" type="Sprite2D" parent="hud/BuildingsHud/buildingback"]
+modulate = Color(0.207843, 0.0901961, 0, 1)
+position = Vector2(-1.49012e-08, -1.78814e-07)
+rotation = 3.14159
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("12_yg84t")
+
+[node name="PlanesHud" type="Button" parent="hud"]
+offset_left = 8.0
+offset_top = 552.0
+offset_right = 67.0
+offset_bottom = 616.0
+scale = Vector2(0.546756, 0.487291)
+toggle_mode = true
+flat = true
+
+[node name="planeback" type="Sprite2D" parent="hud/PlanesHud"]
+modulate = Color(0.207843, 0.0901961, 0, 1)
+position = Vector2(29.2635, 32.8346)
+scale = Vector2(59.6465, 65.2234)
+texture = SubResource("CanvasTexture_p1amn")
+
+[node name="planeback2" type="Sprite2D" parent="hud/PlanesHud/planeback"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(0.00343088, 0.00399538)
+texture = ExtResource("3_3fo1u")
+
+[node name="pointsHUD" type="Node2D" parent="hud"]
+position = Vector2(664, 544)
+
+[node name="pointsLabel" type="Label" parent="hud/pointsHUD"]
+offset_left = 40.0
+offset_right = 85.0
+offset_bottom = 23.0
+scale = Vector2(1.60374, 1.36448)
+
+[node name="pointsDeducted" type="Label" parent="hud/pointsHUD"]
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 120.0
+offset_bottom = 85.0
+scale = Vector2(1.60374, 1.36448)
+theme_override_colors/font_color = Color(0.968587, 5.67943e-06, 7.70092e-07, 1)
+autowrap_mode = 2
+
+[node name="deductTimer" type="Timer" parent="hud/pointsHUD"]
+process_mode = 3
+wait_time = 2.0
+one_shot = true
+
+[node name="points" type="Sprite2D" parent="hud/pointsHUD"]
+position = Vector2(16, 16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("16_h1wcw")
+
+[node name="StartGameButton" type="Button" parent="hud"]
+offset_left = 792.0
+offset_top = 543.0
+offset_right = 898.0
+offset_bottom = 574.0
+disabled = true
+text = "Start Game"
+
+[node name="MotherbaseLabel" type="Label" parent="hud/StartGameButton"]
+layout_mode = 0
+offset_left = -38.0
+offset_top = 38.0
+offset_right = 143.0
+offset_bottom = 81.0
+text = "Place Motherbase First!"
+
+[node name="EnemyPlane2" parent="." instance=ExtResource("5_78jex")]
+position = Vector2(737, 225)
+
+[node name="EnemyPlane3" parent="." instance=ExtResource("7_c502s")]
+position = Vector2(736, 288)
+max_health = 80
+
+[node name="EnemyPlane4" parent="." instance=ExtResource("7_c502s")]
+position = Vector2(670, 354)
+max_health = 80
+
+[node name="EnemyPlane5" parent="." instance=ExtResource("7_c502s")]
+position = Vector2(801, 223)
+max_health = 80
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_aapj2")
+}
+
+[node name="EnemyMotherbase" parent="." instance=ExtResource("17_x7dun")]
+position = Vector2(865, 415)
+
+[node name="EnemyTower" parent="." instance=ExtResource("18_1fdfd")]
+position = Vector2(673, 162)
+
+[node name="EnemyTower2" parent="." instance=ExtResource("18_1fdfd")]
+position = Vector2(671, 417)
 
 [connection signal="mouse_entered" from="board/columnA/1,a" to="board" method="_on_a_mouse_entered_1_a"]
 [connection signal="mouse_entered" from="board/columnA/2,a" to="board" method="_on_a_mouse_entered_2_a"]
@@ -1755,3 +2233,16 @@ position = Vector2(864, 416)
 [connection signal="mouse_entered" from="board/columnO/6,e" to="board" method="_on_e_mouse_entered_6_e"]
 [connection signal="mouse_entered" from="board/columnO/7,e" to="board" method="_on_e_mouse_entered_7_e"]
 [connection signal="mouse_entered" from="board/columnO/8,e" to="board" method="_on_e_mouse_entered_8_e"]
+[connection signal="pressed" from="hud/plane_backboard_node/plane1_summon" to="board" method="planeButtonPressed"]
+[connection signal="pressed" from="hud/plane_backboard_node/plane2_summon" to="board" method="plane2ButtonPressed"]
+[connection signal="pressed" from="hud/plane_backboard_node/plane3_summon" to="board" method="plane3ButtonPressed"]
+[connection signal="pressed" from="hud/plane_backboard_node/plane4_summon" to="board" method="plane4ButtonPressed"]
+[connection signal="pressed" from="hud/plane_backboard_node/plane5_summon" to="board" method="plane5ButtonPressed"]
+[connection signal="pressed" from="hud/building_backboard_node/radar_summon" to="board" method="radarButtonPressed"]
+[connection signal="pressed" from="hud/building_backboard_node/artillary_summon" to="board" method="artillaryButtonPressed"]
+[connection signal="pressed" from="hud/building_backboard_node/motherbase_summon" to="board" method="motherbaseButtonPressed"]
+[connection signal="pressed" from="hud/BuildingsHud" to="board" method="BuildingsHudPressed"]
+[connection signal="pressed" from="hud/PlanesHud" to="board" method="PlanesHudPressed"]
+[connection signal="timeout" from="hud/pointsHUD/deductTimer" to="board" method="_on_deduct_timer_timeout"]
+[connection signal="tree_entered" from="hud/pointsHUD/deductTimer" to="board" method="_on_deduct_timer_tree_entered"]
+[connection signal="pressed" from="hud/StartGameButton" to="board" method="_on_start_game_button_pressed"]

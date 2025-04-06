@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dve8kjmot6y"]
 
 [ext_resource type="PackedScene" uid="uid://c2vf83gypuys3" path="res://playerplane.tscn" id="1_3u3m0"]
-[ext_resource type="Texture2D" uid="uid://ck3ntwdv8mpae" path="res://assets/radiotower.png" id="2_kmwal"]
+[ext_resource type="Texture2D" uid="uid://w7g4gknpcrhg" path="res://assets/radiotower.png" id="2_kmwal"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3u3m0"]
 size = Vector2(192, 192)

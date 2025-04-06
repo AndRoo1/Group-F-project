@@ -6,6 +6,11 @@ signal player_turn_start
 signal player_turn_end
 signal enemy_turn_start
 signal enemy_turn_end
+signal game_started
+signal motherbase_placed
+signal enemy_plane_killed(enemy: Enemy)
+
+var game_currently_started: bool = false
 
 var player_turn: bool = true
 
@@ -190,8 +195,20 @@ func get_enemy_target_position(enemy: Enemy) -> Vector2:
 		enemy_target_positions.append(target_position)
 		return target_position
 
+func place_motherbase():
+	motherbase_placed.emit()
+
+func kill_enemy_plane(enemy: Enemy):
+	enemy_plane_killed.emit(enemy)
+
+func start_game():
+	game_currently_started = true
+	game_started.emit()
+
 func lose():
-	print("YOU LOSE")
+	get_tree().change_scene_to_file("res://lose.tscn")
+	#print("YOU LOSE")
 
 func win():
-	print("YOU WIN")
+	get_tree().change_scene_to_file("res://win.tscn")
+	#print("YOU WIN")

@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi5b0ocdp45y8"]
+
+[ext_resource type="Script" uid="uid://dbfimhwm2lun0" path="res://win.gd" id="1_hgi8f"]
+[ext_resource type="Texture2D" uid="uid://bd27bv2vg8i0c" path="res://assets/fow_background3.jpg" id="1_wao2c"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 0.639
+anchor_bottom = 0.745
+offset_right = -0.127991
+offset_bottom = 8.23999
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.3, 1.3)
+script = ExtResource("1_hgi8f")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1148.0
+offset_bottom = 842.0
+texture = ExtResource("1_wao2c")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -20.0
+offset_right = 38.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.8461
+offset_top = 16.8077
+offset_right = 46.1539
+offset_bottom = 47.8077
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play Again"
+
+[node name="Button2" type="Button" parent="Button"]
+layout_mode = 0
+offset_left = 24.6154
+offset_top = 41.5385
+offset_right = 66.6154
+offset_bottom = 72.5385
+text = "Quit"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button/Button2" to="." method="_on_button_2_pressed"]

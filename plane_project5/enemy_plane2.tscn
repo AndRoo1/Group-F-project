@@ -1,15 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://c55phppan5yr"]
 
 [ext_resource type="PackedScene" uid="uid://cqw3ix0xerthu" path="res://enemyplane.tscn" id="1_poy3i"]
-[ext_resource type="Texture2D" uid="uid://br5rykr5jmw4u" path="res://assets/jetlvl3 1.png" id="2_vdkho"]
+[ext_resource type="Texture2D" uid="uid://bmjlfnbuo4ber" path="res://assets/planes/plane2/jetlvl2up.png" id="2_vdkho"]
 
 [node name="EnemyPlane" instance=ExtResource("1_poy3i")]
-attackDiceMin = 10
-attackDiceMax = 20
-defenseDiceMin = 7
-defenseDiceMax = 17
+max_health = 120
+attackDiceMin = 4
+attackDiceMax = 24
+defenseDiceMax = 28
 attack_chance = 0.3
 
 [node name="Sprite2D" parent="." index="1"]
-scale = Vector2(1, 1)
+position = Vector2(-1.5, 0)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_vdkho")

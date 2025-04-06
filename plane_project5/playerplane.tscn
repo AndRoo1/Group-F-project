@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bh556jpcp7skc" path="res://plane.gd" id="1_6ouxh"]
 [ext_resource type="Material" uid="uid://b1qj1kdm3sv06" path="res://AllyShader.tres" id="2_j2bhc"]
-[ext_resource type="Texture2D" uid="uid://dl18gw3my0e2t" path="res://assets/PlaneDefault.png" id="5_5u47j"]
+[ext_resource type="Texture2D" uid="uid://ble8h0v7qcsie" path="res://assets/planes/plane 1/jetlvl1up.png" id="3_j2bhc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbmn3"]
 bg_color = Color(1, 1, 1, 0)
@@ -37,8 +37,9 @@ bg_color = Color(0, 1, 0, 1)
 [node name="plane" type="Area2D" groups=["player"]]
 input_pickable = false
 script = ExtResource("1_6ouxh")
-attackDiceMin = 7
-attackDiceMax = 30
+attackDiceMax = 14
+defenseDiceMin = 1
+defenseDiceMax = 20
 metadata/_edit_group_ = true
 
 [node name="SelectButton" type="Button" parent="."]
@@ -64,9 +65,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_j2bhc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+texture_filter = 1
 material = ExtResource("2_j2bhc")
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("5_5u47j")
+position = Vector2(0.5, 0)
+texture = ExtResource("3_j2bhc")
 
 [node name="Rotator" type="Node2D" parent="."]
 

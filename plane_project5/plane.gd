@@ -7,6 +7,7 @@ var alive: bool = true
 @export var max_health : int = 100
 var health : int = max_health
 @export var moveable: bool = true
+
 var was_moving: bool = false
 var can_move = true
 @export var attackDiceMin : int = 1
@@ -23,8 +24,12 @@ func _ready():
 	$UI/Healthbar.value = health
 	target_position = position
 	BattleSystem.player_turn_start.connect(turn_start)
-	turn_start()
-	if !moveable:
+	BattleSystem.game_started.connect(game_start)
+	if BattleSystem.player_turn:
+		turn_start()
+	else:
+		can_move = false
+	if !moveable or !BattleSystem.game_currently_started or !BattleSystem.player_turn:
 		disable_select_button()
 	set_rotation_angle(rotation)
 
@@ -98,6 +103,10 @@ func turn_start() -> void:
 	if alive:
 		BattleSystem.register_player_plane(self)
 	if moveable:
+		enable_select_button()
+
+func game_start() -> void:
+	if moveable and BattleSystem.player_turn:
 		enable_select_button()
 
 func _on_area_entered(area: Area2D) -> void:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bfk2dmkihyrd7" path="res://enemyplane.gd" id="1_mikk6"]
 [ext_resource type="Shader" uid="uid://cd6jw58aaln7w" path="res://AssetLibrary/OutlineShader/outline.gdshader" id="2_mtnx4"]
-[ext_resource type="Texture2D" uid="uid://cwjkn3bmdvatw" path="res://assets/PlaneDeath.png" id="2_vx0g3"]
+[ext_resource type="Texture2D" uid="uid://ble8h0v7qcsie" path="res://assets/planes/plane 1/jetlvl1up.png" id="3_mtnx4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vx0g3"]
 radius = 16.0
@@ -25,6 +25,9 @@ bg_color = Color(0, 1, 0, 1)
 
 [node name="EnemyPlane" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_mikk6")
+max_health = 100
+attackDiceMax = 14
+defenseDiceMax = 20
 attack_chance = 0.75
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -32,9 +35,10 @@ position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_vx0g3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 material = SubResource("ShaderMaterial_x51v5")
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("2_vx0g3")
+position = Vector2(0.5, 0)
+texture = ExtResource("3_mtnx4")
 region_rect = Rect2(-19.4874, -6.05128, 865.231, 986.051)
 
 [node name="Rotator" type="Node2D" parent="."]
@@ -65,7 +69,7 @@ grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_mtnx4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_x51v5")
-value = 28.51
+value = 100.0
 show_percentage = false
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

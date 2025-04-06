@@ -16,6 +16,8 @@ var can_move = false
 @export var combat_range : float = 1
 @export_range(0, 1) var attack_chance : float = 1
 
+@export var point_reward : int = 50
+
 var target_position: Vector2
 
 func _ready() -> void:

@@ -47,9 +47,10 @@ size = Vector2(64, 64)
 script = ExtResource("1_d26bh")
 
 [node name="fogPos" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.466667)
+top_level = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos"]
-modulate = Color(1, 1, 1, 0.384314)
 texture_filter = 1
 position = Vector2(32, 32)
 scale = Vector2(8, 8)
@@ -65,6 +66,14 @@ modulate = Color(9.2411e-06, 0.679558, 0.635558, 1)
 position = Vector2(32, 32)
 scale = Vector2(48, 48)
 texture = SubResource("CanvasTexture_s5xn7")
+
+[node name="fogNum" type="Label" parent="."]
+offset_left = 23.0
+offset_top = 10.0
+offset_right = 41.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(1, 0.596078, 0, 1)
+theme_override_font_sizes/font_size = 31
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

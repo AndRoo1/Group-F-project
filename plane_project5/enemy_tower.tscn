@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7tn1was60p4g"]
 
 [ext_resource type="PackedScene" uid="uid://cqw3ix0xerthu" path="res://enemyplane.tscn" id="1_st0up"]
-[ext_resource type="Texture2D" uid="uid://ck3ntwdv8mpae" path="res://assets/radiotower.png" id="2_cflsa"]
+[ext_resource type="Texture2D" uid="uid://w7g4gknpcrhg" path="res://assets/radiotower.png" id="2_cflsa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cflsa"]
 size = Vector2(192, 192)
@@ -12,6 +12,7 @@ attackDiceMin = 4
 attackDiceMax = 8
 defenseDiceMin = 6
 combat_range = 1.5
+point_reward = 100
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, 0)

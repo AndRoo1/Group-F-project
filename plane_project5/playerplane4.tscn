@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://6bu2wn8jmb14"]
+
+[ext_resource type="PackedScene" uid="uid://d31w5hmo0ksmn" path="res://playerplane3.tscn" id="1_2f2lj"]
+[ext_resource type="Texture2D" uid="uid://cdd6xu802opkf" path="res://assets/planes/plane4/jetlvl4up.png" id="2_brhjc"]
+
+[node name="plane" instance=ExtResource("1_2f2lj")]
+max_health = 130
+attackDiceMin = 4
+attackDiceMax = 30
+defenseDiceMin = 6
+defenseDiceMax = 30
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_brhjc")
+offset = Vector2(-3.2, 0)
