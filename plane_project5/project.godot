@@ -26,7 +26,6 @@ BattleSystem="*res://battle_system.gd"
 
 window/size/viewport_width=960
 window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
 
 [input]
 

@@ -1901,7 +1901,6 @@ scale = Vector2(3.99617, 4.01801)
 texture = ExtResource("10_7v7ku")
 
 [node name="planepoints1" type="Label" parent="hud/plane_backboard_node"]
-visible = false
 offset_left = 97.0
 offset_top = 599.0
 offset_right = 137.0
