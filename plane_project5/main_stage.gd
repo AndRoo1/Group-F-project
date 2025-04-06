@@ -28,6 +28,7 @@ func switch_scene(new_scene: Object) -> void:
 		add_child(new_scene)
 	current_scene = new_scene
 
+# Start battle when we receive signal from the battle system
 func start_battle(player_combatant: Player, enemy_combatant: Enemy) -> void:
 	battle_scene = battle_scene_resource.instantiate()
 	print("start bt", player_combatant, enemy_combatant)
@@ -35,6 +36,8 @@ func start_battle(player_combatant: Player, enemy_combatant: Enemy) -> void:
 	battle_scene.enemy_combatant = enemy_combatant
 	switch_scene(battle_scene)
 
+# End battle when we receive signal from battle system, which gets rid of the planes
+# from the battle grid
 func end_battle(player_won: bool, battle_end : bool) -> void:
 	if battle_end:
 		if player_won:

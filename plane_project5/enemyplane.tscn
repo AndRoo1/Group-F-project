@@ -21,7 +21,7 @@ script = ExtResource("1_mikk6")
 max_health = 100
 attackDiceMax = 14
 defenseDiceMax = 20
-attack_chance = 0.75
+attack_chance = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -32)

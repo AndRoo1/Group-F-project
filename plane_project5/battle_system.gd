@@ -1,5 +1,6 @@
 extends Node
 
+# Signals about various game state changes
 signal battle_started(player_combatant: Player, enemy_combatant: Enemy)
 signal battle_ended(player_won: bool, battle_end: bool)
 signal player_turn_start
@@ -10,15 +11,19 @@ signal game_started
 signal motherbase_placed
 signal enemy_plane_killed(enemy: Enemy)
 
+# Whether the game is started
 var game_currently_started: bool = false
 
+# If its player turn or not
 var player_turn: bool = true
 
+# Various player state variables
 var movable_player_planes_available: int = 0
 var player_planes_available: int = 0
 var player_planes_moved: int = 0
 var player_planes: Array[Player] = []
 
+# Various enemy state variables
 var movable_enemy_planes_available: int = 0
 var enemy_planes_available: int = 0
 var enemy_planes_moved: int = 0
@@ -35,6 +40,7 @@ var next_enemy_act_queued: bool = false
 func start_player_turn():
 	print("Start Player Turn Called")
 	if !player_turn:
+		# Reset the player state variables
 		print("Started Player Turn")
 		player_planes_available = 0
 		movable_player_planes_available = 0
@@ -47,6 +53,7 @@ func start_player_turn():
 func start_enemy_turn():
 	print("Start Enemy Turn Called")
 	if player_turn:
+		# Reset the enemy state variables
 		print("Started Enemy Turn")
 		enemy_planes = []
 		enemy_planes_available = 0
@@ -60,12 +67,14 @@ func start_enemy_turn():
 		enemy_turn_start.emit()
 
 func register_player_plane(player_plane: Player):
+	# Register the player plane so that we keep track of it for calculating turn stuff
 	player_planes_available += 1
 	if player_plane.moveable:
 		movable_player_planes_available += 1
 	player_planes.append(player_plane)
 
 func register_enemy_plane(enemy_plane: Enemy):
+	# Same as above but for enemies
 	enemy_planes_available += 1
 	if enemy_plane.moveable:
 		movable_enemy_planes_available += 1
@@ -84,6 +93,7 @@ func player_plane_start_move():
 	player_planes_moved += 1
 	plane_start_move()
 
+# We check for if we should end the turn yet for the player
 func player_plane_end_move():
 	plane_end_move()
 	if !in_battle:
@@ -93,6 +103,7 @@ func enemy_plane_start_move():
 	enemy_planes_moved += 1
 	plane_start_move()
 
+# Same check for enemy
 func enemy_plane_end_move():
 	plane_end_move()
 	if !in_battle:
@@ -102,14 +113,20 @@ func check_for_player_end_of_turn():
 	if player_planes_moved >= movable_player_planes_available:
 		start_enemy_turn()
 
+# I don't know if this is actually doing much
 func check_for_enemy_end_of_turn():
 	if enemy_planes_moved >= movable_enemy_planes_available:
 		start_player_turn()
 
+# Start the battle. After this, the main_stage.gd receives the battle start signal
+# and changes scene to the battle scene
 func start_battle(player_combatant: Player, enemy_combatant: Enemy):
 	battle_started.emit(player_combatant, enemy_combatant)
 	in_battle = true
-	
+
+# Same as above, but for ending battle
+# When the battle ends, it checks if we should end the player turn or enemy turn
+# and if an enemy was queued to move, it does that or starts player turn
 func end_battle(player_won: bool, battle_end: bool):
 	in_battle = false
 	plane_moving = false
@@ -126,9 +143,12 @@ func end_battle(player_won: bool, battle_end: bool):
 			else:
 				start_player_turn()
 
+# Makes an enemy plane start 'acting' aka moving
 func pick_enemy_plane_to_act():
 	enemy_planes[enemy_plane_acting_index].start_acting()
 
+# When an enemy plane finishes acting, it either makes the next enemy plane act
+# or it starts the player turn if there are no more planes to act
 func enemy_plane_finished_acting(enemy_plane: Enemy):
 	enemy_plane_acting_index += 1
 	if !in_battle:
@@ -139,6 +159,14 @@ func enemy_plane_finished_acting(enemy_plane: Enemy):
 	else:
 		next_enemy_act_queued = true
 
+# INCREDIBLY complicated function that calculates where a specific enemy plane should move.
+# This is the 'AI' of the enemies.
+# The gist of it is: Each enemy targets the plane closest to them,
+# unless another plane has already targeted that plane.
+# In that case, the enemy tries to target another plane
+# No enemies will move onto the same tile
+# If two enemies pick the same tile to move, one of the enemies will try to move
+# to a semi-random tile
 func get_enemy_target_position(enemy: Enemy) -> Vector2:
 	var min_distance: float = 10000000
 	var min_distance_node: Node2D = null

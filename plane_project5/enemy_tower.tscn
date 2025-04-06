@@ -1,10 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7tn1was60p4g"]
+[gd_scene load_steps=12 format=3 uid="uid://c7tn1was60p4g"]
 
 [ext_resource type="PackedScene" uid="uid://cqw3ix0xerthu" path="res://enemyplane.tscn" id="1_st0up"]
 [ext_resource type="Texture2D" uid="uid://w7g4gknpcrhg" path="res://assets/radiotower.png" id="2_cflsa"]
+[ext_resource type="Texture2D" uid="uid://bl38jnf230cu3" path="res://assets/fog/f1.png" id="3_gnxmd"]
+[ext_resource type="Texture2D" uid="uid://drcegctdcxax5" path="res://assets/fog/f2.png" id="4_7fa6v"]
+[ext_resource type="Texture2D" uid="uid://dsi1tltb2tmit" path="res://assets/fog/f3.png" id="5_jo0bb"]
+[ext_resource type="Texture2D" uid="uid://3lyg4y4dovl4" path="res://assets/fog/f4.png" id="6_hbunh"]
+[ext_resource type="Texture2D" uid="uid://cgi1rcvrm8w01" path="res://assets/fog/f5.png" id="7_4s7fn"]
+[ext_resource type="Texture2D" uid="uid://cniice5c0nsyj" path="res://assets/fog/f6.png" id="8_5ykga"]
+[ext_resource type="Texture2D" uid="uid://qp1eutcn12k1" path="res://assets/fog/f7.png" id="9_lgb23"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cflsa"]
 size = Vector2(192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wq8b7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gnxmd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7fa6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jo0bb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hbunh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4s7fn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5ykga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lgb23")
+}],
+"loop": true,
+"name": &"fogAnimation",
+"speed": 5.0
+}]
 
 [node name="EnemyTower" instance=ExtResource("1_st0up")]
 moveable = false
@@ -21,3 +57,101 @@ shape = SubResource("RectangleShape2D_cflsa")
 [node name="Sprite2D" parent="." index="1"]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_cflsa")
+
+[node name="fogPos" type="Node2D" parent="." index="5"]
+modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(-64, -64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"
+
+[node name="fogPos2" type="Node2D" parent="." index="6"]
+modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(0, -64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos2" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"
+
+[node name="fogPos3" type="Node2D" parent="." index="7"]
+modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(64, -64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos3" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"
+
+[node name="fogPos4" type="Node2D" parent="." index="8"]
+modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(-64, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos4" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"
+
+[node name="fogPos5" type="Node2D" parent="." index="9"]
+modulate = Color(1, 1, 1, 0.466667)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos5" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"
+
+[node name="fogPos7" type="Node2D" parent="." index="10"]
+modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(-64, 64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos7" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"
+
+[node name="fogPos8" type="Node2D" parent="." index="11"]
+modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(0, 64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos8" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"
+
+[node name="fogPos9" type="Node2D" parent="." index="12"]
+modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(64, 64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos9" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"
+
+[node name="fogPos6" type="Node2D" parent="." index="13"]
+modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(64, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fogPos6" index="0"]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_wq8b7")
+animation = &"fogAnimation"
+autoplay = "fogAnimation"

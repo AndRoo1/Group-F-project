@@ -12,23 +12,28 @@ const DAMAGE_COLOR : Color = Color(1, 0.1, 0.1)
 
 func _ready() -> void:
 	if player_combatant != null:
+		# Set the player icon on the left to the player plane sprite
 		var player_sprite: Sprite2D = player_combatant.get_node("Sprite2D")
 		$Player.texture = player_sprite.texture
 		$Player.material = player_sprite.material
 	
 	
 	if enemy_combatant != null:
+		# Set the enemy icon on the left to the enemy plane sprite
 		var enemy_sprite: Sprite2D = enemy_combatant.get_node("Sprite2D")
 		$Enemy.texture = enemy_sprite.texture
 		$Enemy.material = enemy_sprite.material
 	randomize()
 	
+	# Set health labels to their respective combatants health
 	$playerHealth.text = str(player_combatant.health)
 	$enemyHealth.text = str(enemy_combatant.health)
 	
 
 
 	#$DiceLabel.text = str(playerDice)
+
+# The following four functions randomise the player/enemy dice based on whether they're picking to attack or defend
 func randomise_player_attack() -> void:
 	playerDice = randi_range(player_combatant.attackDiceMin,player_combatant.attackDiceMax)
 
@@ -41,7 +46,7 @@ func randomise_player_defense() -> void:
 func randomise_enemy_defense() -> void:
 	enemyDice = randi_range(enemy_combatant.defenseDiceMin,enemy_combatant.defenseDiceMax)
 
-
+# Whether the enemy attacks or not during a clash is based on their attack chance
 func _on_attack_button_pressed() -> void:
 	clash(true, randf() < enemy_combatant.attack_chance)
 
@@ -49,6 +54,8 @@ func _on_defense_button_pressed() -> void:
 	clash(false, randf() < enemy_combatant.attack_chance)
 
 func clash(player_attacking: bool, enemy_attacking: bool) -> void:
+	# The following conditions check whether the player and enemy are defending or not
+	# and randomise their dice values based on this
 	if player_attacking:
 		player_defending = false
 		$DiceLabel.add_theme_color_override("font_color", ATTACK_COLOR)
@@ -70,6 +77,7 @@ func clash(player_attacking: bool, enemy_attacking: bool) -> void:
 	$DiceLabel.text = str(playerDice)
 	$DiceLabel2.text = str(enemyDice)
 	
+	# Clash calculation - first we check who has the higher dice value, then we check if the winner is attacking or defending
 	if playerDice > enemyDice:
 		if player_attacking:
 			player_attack_win()
@@ -84,7 +92,8 @@ func clash(player_attacking: bool, enemy_attacking: bool) -> void:
 		print("draw!")
 	do_battle_stuff()
 
-
+# On attack victories, change the health of the loser by the attack value
+# If the loser was defending, they take less damage, based on the dice value
 func player_attack_win():
 	enemy_combatant.set_health(enemy_combatant.health - (playerDice - enemyDice * int(enemy_defending)))
 	$enemyHealth.add_theme_color_override("font_color", Color(1, 0.1, 0.1))
@@ -100,6 +109,9 @@ func enemy_defense_win():
 	pass
 
 func do_battle_stuff():
+	# Disable the attack and defense buttons for the period of the clash
+	# and set the health values to their proper values
+	# afterwards, calculate if either of the planes die
 	$AttackButton.disabled = true
 	$DefenseButton.disabled = true
 	$playerHealth.text = str(player_combatant.health)

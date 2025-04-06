@@ -8,7 +8,7 @@ max_health = 120
 attackDiceMin = 4
 attackDiceMax = 24
 defenseDiceMax = 28
-attack_chance = 0.3
+attack_chance = 0.6
 
 [node name="Sprite2D" parent="." index="1"]
 position = Vector2(-1.5, 0)
