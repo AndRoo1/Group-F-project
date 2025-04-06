@@ -5,19 +5,20 @@
 
 [node name="Options" type="Control"]
 layout_mode = 3
-anchor_right = 1.278
-anchor_bottom = 1.134
-offset_right = -736.256
-offset_bottom = -244.832
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 1.5)
 script = ExtResource("1_5v8ap")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2

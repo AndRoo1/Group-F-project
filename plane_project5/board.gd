@@ -3,8 +3,6 @@ extends Node2D
 @onready var plane_holo = $plane_holo
 @onready var radio_holo = $radio_tower_holo
 @onready var motherbase_holo = $motherbase_holo
-@onready var radio_tower = $radio_tower
-@onready var air_artillery = $air_artillery
 @onready var artillery_holo = $artillery_holo
 @onready var startGameButton : Button = $"../hud/StartGameButton"
 @onready var motherbaseButton : Button = $"../hud/building_backboard_node/motherbase_summon"

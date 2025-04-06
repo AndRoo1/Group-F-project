@@ -10,14 +10,23 @@ config_version=5
 
 [application]
 
-config/name="plane_projectv5"
+config/name="Fog of War"
+config/description="Group F project. Fog of War."
+config/version="1.0.0"
 run/main_scene="uid://cmr2sc1ufnqnw"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="uid://co2bspcd4kywc"
+config/icon="uid://uq2dbchon6b1"
 
 [autoload]
 
 BattleSystem="*res://battle_system.gd"
+
+[display]
+
+window/size/viewport_width=960
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [input]
 
