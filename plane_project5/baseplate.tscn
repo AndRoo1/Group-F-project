@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://doei0f7rlbum4"]
+[gd_scene load_steps=36 format=3 uid="uid://doei0f7rlbum4"]
 
 [ext_resource type="Script" uid="uid://cl6n1vj8dl7l1" path="res://baseplate.gd" id="1_qx80w"]
 [ext_resource type="Script" uid="uid://sc4bn081wx87" path="res://board.gd" id="2_iljyf"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://bkfwrwsunixyo" path="res://assets/points.png" id="16_h1wcw"]
 [ext_resource type="PackedScene" uid="uid://bghfw5pkuvanj" path="res://enemy_motherbase.tscn" id="17_x7dun"]
 [ext_resource type="PackedScene" uid="uid://c7tn1was60p4g" path="res://enemy_tower.tscn" id="18_1fdfd"]
+[ext_resource type="PackedScene" uid="uid://cbutoh3asb0eh" path="res://player_air_artillery.tscn" id="19_1fdfd"]
+[ext_resource type="PackedScene" uid="uid://baa7edw3blbic" path="res://enemy_air_artillery.tscn" id="20_ev7tn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lb612"]
 size = Vector2(64, 64)
@@ -45,6 +47,8 @@ animations = [{
 }]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_8n4fi"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_x7dun"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_3fo1u"]
 
@@ -1750,8 +1754,15 @@ modulate = Color(0, 0, 0.819608, 1)
 scale = Vector2(192, 192)
 texture = SubResource("CanvasTexture_8n4fi")
 
+[node name="artillery_holo" type="Sprite2D" parent="board"]
+modulate = Color(0, 0.713726, 0.713726, 1)
+self_modulate = Color(1, 0, 1, 1)
+position = Vector2(-24.25, 10.5)
+scale = Vector2(49.5, 47)
+texture = SubResource("CanvasTexture_x7dun")
+
 [node name="EnemyPlane" parent="." instance=ExtResource("5_78jex")]
-position = Vector2(738, 97)
+position = Vector2(736, 96)
 
 [node name="hud" type="Node2D" parent="."]
 
@@ -1891,6 +1902,7 @@ scale = Vector2(3.99617, 4.01801)
 texture = ExtResource("10_7v7ku")
 
 [node name="planepoints1" type="Label" parent="hud/plane_backboard_node"]
+visible = false
 offset_left = 97.0
 offset_top = 599.0
 offset_right = 137.0
@@ -1947,7 +1959,7 @@ position = Vector2(131.494, 128.47)
 scale = Vector2(1.61574, 1.40858)
 texture = ExtResource("6_3fo1u")
 
-[node name="artillary_summon" type="Button" parent="hud/building_backboard_node"]
+[node name="artillery_summon" type="Button" parent="hud/building_backboard_node"]
 offset_left = 190.0
 offset_top = 545.0
 offset_right = 484.0
@@ -1959,7 +1971,7 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="hud/building_backboard_node/artillary_summon"]
+[node name="Sprite2D" type="Sprite2D" parent="hud/building_backboard_node/artillery_summon"]
 texture_filter = 1
 position = Vector2(139.008, 124.691)
 scale = Vector2(1.5, 1.434)
@@ -2085,18 +2097,18 @@ offset_bottom = 81.0
 text = "Place Motherbase First!"
 
 [node name="EnemyPlane2" parent="." instance=ExtResource("5_78jex")]
-position = Vector2(737, 225)
+position = Vector2(736, 224)
 
 [node name="EnemyPlane3" parent="." instance=ExtResource("7_c502s")]
 position = Vector2(736, 288)
 max_health = 80
 
 [node name="EnemyPlane4" parent="." instance=ExtResource("7_c502s")]
-position = Vector2(670, 354)
+position = Vector2(672, 352)
 max_health = 80
 
 [node name="EnemyPlane5" parent="." instance=ExtResource("7_c502s")]
-position = Vector2(801, 223)
+position = Vector2(800, 224)
 max_health = 80
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -2105,13 +2117,37 @@ libraries = {
 }
 
 [node name="EnemyMotherbase" parent="." instance=ExtResource("17_x7dun")]
-position = Vector2(865, 415)
+position = Vector2(864, 416)
 
 [node name="EnemyTower" parent="." instance=ExtResource("18_1fdfd")]
-position = Vector2(673, 162)
+position = Vector2(672, 160)
 
 [node name="EnemyTower2" parent="." instance=ExtResource("18_1fdfd")]
-position = Vector2(671, 417)
+position = Vector2(672, 416)
+
+[node name="PlayerArtillery" parent="." instance=ExtResource("19_1fdfd")]
+position = Vector2(480, 416)
+
+[node name="PlayerArtillery2" parent="." instance=ExtResource("19_1fdfd")]
+position = Vector2(480, 160)
+
+[node name="PlayerArtillery3" parent="." instance=ExtResource("19_1fdfd")]
+position = Vector2(480, 224)
+
+[node name="PlayerArtillery4" parent="." instance=ExtResource("19_1fdfd")]
+position = Vector2(480, 288)
+
+[node name="PlayerArtillery5" parent="." instance=ExtResource("19_1fdfd")]
+position = Vector2(480, 352)
+
+[node name="PlayerArtillery6" parent="." instance=ExtResource("19_1fdfd")]
+position = Vector2(480, 96)
+
+[node name="EnemyArtillery" parent="." instance=ExtResource("20_ev7tn")]
+position = Vector2(160, 352)
+
+[node name="EnemyArtillery2" parent="." instance=ExtResource("20_ev7tn")]
+position = Vector2(224, 352)
 
 [connection signal="mouse_entered" from="board/columnA/1,a" to="board" method="_on_a_mouse_entered_1_a"]
 [connection signal="mouse_entered" from="board/columnA/2,a" to="board" method="_on_a_mouse_entered_2_a"]
@@ -2239,7 +2275,7 @@ position = Vector2(671, 417)
 [connection signal="pressed" from="hud/plane_backboard_node/plane4_summon" to="board" method="plane4ButtonPressed"]
 [connection signal="pressed" from="hud/plane_backboard_node/plane5_summon" to="board" method="plane5ButtonPressed"]
 [connection signal="pressed" from="hud/building_backboard_node/radar_summon" to="board" method="radarButtonPressed"]
-[connection signal="pressed" from="hud/building_backboard_node/artillary_summon" to="board" method="artillaryButtonPressed"]
+[connection signal="pressed" from="hud/building_backboard_node/artillery_summon" to="board" method="artilleryButtonPressed"]
 [connection signal="pressed" from="hud/building_backboard_node/motherbase_summon" to="board" method="motherbaseButtonPressed"]
 [connection signal="pressed" from="hud/BuildingsHud" to="board" method="BuildingsHudPressed"]
 [connection signal="pressed" from="hud/PlanesHud" to="board" method="PlanesHudPressed"]

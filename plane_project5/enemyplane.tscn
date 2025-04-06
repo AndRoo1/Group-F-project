@@ -1,27 +1,20 @@
 [gd_scene load_steps=8 format=3 uid="uid://cqw3ix0xerthu"]
 
 [ext_resource type="Script" uid="uid://bfk2dmkihyrd7" path="res://enemyplane.gd" id="1_mikk6"]
-[ext_resource type="Shader" uid="uid://cd6jw58aaln7w" path="res://AssetLibrary/OutlineShader/outline.gdshader" id="2_mtnx4"]
+[ext_resource type="Material" uid="uid://d1jwhgsxc5h13" path="res://EnemyMaterial.tres" id="2_mtnx4"]
 [ext_resource type="Texture2D" uid="uid://ble8h0v7qcsie" path="res://assets/planes/plane 1/jetlvl1up.png" id="3_mtnx4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vx0g3"]
 radius = 16.0
 height = 100.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x51v5"]
-shader = ExtResource("2_mtnx4")
-shader_parameter/color = Color(1, 0, 0, 0.517647)
-shader_parameter/width = 3.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-shader_parameter/number_of_images = Vector2(1, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtnx4"]
 bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x51v5"]
 bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtnx4"]
 
 [node name="EnemyPlane" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_mikk6")
@@ -36,7 +29,7 @@ shape = SubResource("CapsuleShape2D_vx0g3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_x51v5")
+material = ExtResource("2_mtnx4")
 position = Vector2(0.5, 0)
 texture = ExtResource("3_mtnx4")
 region_rect = Rect2(-19.4874, -6.05128, 865.231, 986.051)
@@ -71,5 +64,11 @@ theme_override_styles/background = SubResource("StyleBoxFlat_mtnx4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_x51v5")
 value = 100.0
 show_percentage = false
+
+[node name="enemyartillerytrigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="enemyartillerytrigger"]
+shape = SubResource("RectangleShape2D_mtnx4")
+debug_color = Color(0.214608, 0.639577, 1.34766e-06, 0.42)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

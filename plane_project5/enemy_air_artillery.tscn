@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://baa7edw3blbic"]
+
+[ext_resource type="Script" uid="uid://ks7tvttmyx8s" path="res://enemyairartillery.gd" id="1_vdlfi"]
+[ext_resource type="Material" uid="uid://d1jwhgsxc5h13" path="res://EnemyMaterial.tres" id="2_gfq6c"]
+[ext_resource type="Texture2D" uid="uid://c3tmcw4oeq6d6" path="res://antiartillery.png" id="2_xvomi"]
+[ext_resource type="SpriteFrames" uid="uid://bq1fnx60103ur" path="res://explode.tres" id="3_gfq6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wv1ba"]
+size = Vector2(38, 36)
+
+[node name="EnemyArtillery" type="Area2D"]
+script = ExtResource("1_vdlfi")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = ExtResource("2_gfq6c")
+scale = Vector2(0.38, 0.299687)
+texture = ExtResource("2_xvomi")
+
+[node name="ArtilleryCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wv1ba")
+debug_color = Color(0.998188, 0, 0.148357, 0.42)
+
+[node name="Explode" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(0.352937, 0.308683)
+sprite_frames = ExtResource("3_gfq6c")
+animation = &"explode"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

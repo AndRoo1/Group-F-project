@@ -4,6 +4,8 @@ extends Node2D
 @onready var radio_holo = $radio_tower_holo
 @onready var motherbase_holo = $motherbase_holo
 @onready var radio_tower = $radio_tower
+@onready var air_artillery = $air_artillery
+@onready var artillery_holo = $artillery_holo
 @onready var startGameButton : Button = $"../hud/StartGameButton"
 @onready var motherbaseButton : Button = $"../hud/building_backboard_node/motherbase_summon"
 @onready var deductTimer : Timer = get_node("../hud/pointsHUD/deductTimer")
@@ -37,7 +39,16 @@ func _ready():
 	BattleSystem.player_turn_end.connect(player_turn_end)
 
 func player_turn_start():
-	$"../AnimationPlayer".play_backwards("HideButtons")
+	var player_planes = get_tree().get_nodes_in_group("player")
+	var moveable_planes_left = false
+	for plane: Player in player_planes:
+		if plane.moveable:
+			moveable_planes_left = true
+			break
+	if moveable_planes_left or points >= 100:
+		$"../AnimationPlayer".play_backwards("HideButtons")
+	else:
+		BattleSystem.start_enemy_turn()
 
 func player_turn_end():
 	$"../AnimationPlayer".play("HideButtons")
@@ -67,7 +78,7 @@ func _process(delta):
 	if build_mode: #if true
 		radio_holo.position = Vector2(squareX*64+32,squareY*64+32) #moves radioholo to mouse
 		motherbase_holo.position = Vector2(squareX*64+32,squareY*64+32)
-	
+		artillery_holo.position = Vector2(squareX * 64 + 32, squareY * 64 + 32)
 	if plane_mode:
 		plane_holo.position = Vector2(squareX*64+32,squareY*64+32) #moves radioholo to mouse
 		
@@ -89,7 +100,16 @@ func _process(delta):
 		make_motherbase()
 		motherbaseinUse = true
 		print("mother is here")
-		
+
+	if build_mode == true && building_type == 2 && can_place == true && Input.is_action_just_pressed("build"): #build is just another way of saying left clickkkk blehh
+		var air_artillery_scene = preload("res://player_air_artillery.tscn")  #path to scene
+		var new_tower = air_artillery_scene.instantiate()  # makes artillery
+		new_tower.position = Vector2(squareX*64+32,squareY*64+32)  # Place it at the mouse position
+		#get_tree().current_scene.add_child(new_tower) # 
+		add_child(new_tower)
+		build_mode = false
+		make_artillery()
+
 	if build_mode == true && building_type == 1 && can_place == true && Input.is_action_just_pressed("build"): #build is just another way of saying left clickkkk blehh
 		var radio_tower_scene = preload("res://radio_tower.tscn")  #path to scene
 		var new_tower = radio_tower_scene.instantiate()  # makes radio tower
@@ -97,6 +117,7 @@ func _process(delta):
 		#get_tree().current_scene.add_child(new_tower) # 
 		add_child(new_tower)
 		build_mode = false
+		make_radar()
 	
 	var plane_scenes = ["res://playerplane.tscn","res://playerplane2.tscn","res://playerplane3.tscn","res://playerplane4.tscn","res://playerplane5.tscn"]
 	if plane_mode && Input.is_action_just_pressed("build"):
@@ -122,6 +143,9 @@ func make_motherbase():
 
 func make_plane():
 	plane_holo.visible = plane_mode
+
+func make_artillery():
+	artillery_holo.visible = build_mode 
 
 func planeButtonPressed() -> void: # this is essentially copy paste for other planes 
 	if points >= 100: #buying system
@@ -195,10 +219,12 @@ func radarButtonPressed() -> void:
 		pointsDeducted.text = ("INSUFFICIENT POINTS!")
 		deductTimer.start()
 		
-func artillaryButtonPressed() -> void:
+func artilleryButtonPressed() -> void:
 	if points >= 200:
 		points = points - 200
-		#code
+		building_type = 2
+		build_mode = !build_mode  # inverts bool state
+		make_artillery()  #
 		pointsDeducted.text = str(-200)
 		deductTimer.start()
 	else:

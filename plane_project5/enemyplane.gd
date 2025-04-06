@@ -5,7 +5,7 @@ extends Area2D
 @export var grid_size: int = 64  # Size of each grid 
 var alive: bool = true
 @export var max_health : int = 80
-var health : int = max_health
+@onready var health : int = max_health
 @export var moveable: bool = true
 var was_moving: bool = false
 var can_move = false
